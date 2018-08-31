@@ -1,0 +1,6 @@
+ui\header\WelcomeChatUiVmd.class
+ui\MessageBaseVmd.class
+CommonLibrary\XmlDatabase\XmlRepositoryChat.class
+Chat\MainComponent\ChatComposer.class
+Chat\MainComponent\ChatComposerDetail.class
+CommonLibrary\XmlDatabase\XmlCommonChattingQuery.class

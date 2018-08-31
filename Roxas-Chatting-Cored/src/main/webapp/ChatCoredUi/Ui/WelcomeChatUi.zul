@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title=""?>
+<zk>
+<window apply="org.zkoss.bind.BindComposer" title="" border="none"  style = "background-color : transparent;" shadow="false"
+viewModel="@id('vm') @init('ui.header.WelcomeChatUiVmd')">
+<div style="position : absolute; right : 0px; top : 5px;">
+<button sclass="" label="Chat" onClick="@command('openChat')"/>
+</div>
+<include visible="@bind(vm.onChat)" src="/ChatCoredUi/Pallete/ChatPallete.zul"/>
+</window>
+</zk>

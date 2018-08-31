@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="Roxas-Katering-Common-Lib-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Roxas-Katering-Common-Lib/Roxas-Katering-Common-Lib">
+        <dependent-module archiveName="Roxas-Katering-Common-Lib-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Roxas-Katering-Common-Lib2/Roxas-Katering-Common-Lib2">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="Roxas-Chatting-Common-Lib-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Roxas-Chatting-Common-Lib/Roxas-Chatting-Common-Lib">

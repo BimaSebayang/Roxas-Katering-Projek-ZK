@@ -1,0 +1,53 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window apply="org.zkoss.bind.BindComposer" title="" border="none"  style = "background-color : transparent;" shadow="false"
+viewModel="@id('vm') @init('Chat.MainComponent.ChatComposerDetail')">
+<!--   Timer ini berguna untuk mengupdate semua nilai yang ada dibawahnya -->
+ 
+<!-- <timer id="timer" delay="1000" repeats="true" onTimer="@command('timerUpdater')"/>  -->
+
+<div style="background-color : #191A17; position : absolute; right : 0px; top : 5px; width : 300px;">
+    <label value="--LIST USER ONLINE--" style="color : white; "/>
+	
+	<listbox model="@bind(vm.collectAllUserOnline)"  selectedItem="@bind(vm.selectedUserChat)">
+	<listhead>
+	</listhead>
+	<template name="model">
+	<listitem>
+	<listcell label="@bind(each.pegawaiId)" visible="@bind( (each.pegawaiId ne null or '' ) and (each.pegawaiId ne vm.currentUser))" onClick="@command('chatPerson')"/>
+	<listcell label="@bind(each.pegawaiName)" visible="@bind((each.pegawaiId ne null or '') and (each.pegawaiId ne vm.currentUser))"  onClick="@command('chatPerson')"/>
+	</listitem>
+	</template>
+	</listbox>
+
+<div visible="@bind(vm.onChatPerson)" style="position : absolute; right : 300px; top : 5px; width : 300px;">
+<vbox>
+<hbox>
+<label value="Anda Sedang Chat dengan"/> <label value="@bind(vm.selectedUserChat.pegawaiName)"/>
+</hbox>
+<hbox>
+<textbox value="@bind(vm.chatPhrase)" width="100px"/>
+<button label="Kirim" onClick="@command('sendChat')"/>
+</hbox>
+<listbox model="@bind(vm.chatMessageDtlDtos)" >
+<listhead>
+<listheader label="Tanggal Kirim"/>
+<listheader label="Pengirim"/>
+<listheader label="Pesan"/>
+</listhead>
+<template name="model">
+<listitem>
+<listcell label="@bind(each.sendDate)"/>
+<listcell label="@bind(each.messager)"/>
+<listcell label="@bind(each.message)"/>
+</listitem>
+</template>
+</listbox>
+</vbox>
+
+</div>
+
+</div>
+
+</window>
+</zk>

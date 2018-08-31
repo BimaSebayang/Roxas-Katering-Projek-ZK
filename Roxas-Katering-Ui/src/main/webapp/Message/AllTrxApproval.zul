@@ -1,0 +1,47 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<include src="/StyleSheet/MenuUtama/MenuTransaksiStyle.zul"/>
+<include src="/StyleSheet/MessageBox/MessageBoxStyle.zul"/>
+<include src="/Constraint/CustomConstraintTransaksi.zul"/>
+<include src="/JavaScript/FormConstraintJs.zul"/>
+
+<window title="" border="normal" sclass="window-transaksi" 
+apply="org.zkoss.bind.BindComposer" 
+viewModel="@id('vm') @init('vmd.Message.AllTrxApprovalVmd')">
+
+<div style="position : relative; top : -3px; left : 0px;">
+	<textbox sclass="text-box-forgotPassword" value="@bind(vm.search)" onOK="@command('searchOrClick')" placeholder="Search..."/>
+	<button iconSclass="z-icon-search-plus" height= "33px" width = "33px" 
+	onClick="@command('searchOrClick')"  sclass="w3SearchButton"/>
+	<button label="Refresh" onClick="@command('refreshList')" 
+	        height= "35px" left="61%" iconSclass="z-icon-refresh" sclass="w3SearchButton" />
+</div>
+
+
+
+<div style="overflow-x:auto;overflow-y:auto; width:98.5%;">
+<listbox  selectedItem="@bind(vm.tableApprovalMessageDtlDto)"
+sclass="listBoxIndex" model="@load(vm.tableApprovalMessageDtlDtos)" mold="paging" pagingPosition="bottom" pageSize="10">
+<listhead>
+<listheader label="ID PESAN" style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+<listheader label="ID TRANSAKSI" style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+<listheader label="MENU " style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+<listheader label="PENGIRIM " style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+<listheader label="TANGGAL KIRIM " style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+</listhead>
+<template name="model">
+<listitem>
+<listcell label="@load(each.messageId)" style="font-size : 11px; background-color : #DBD7D2;" onDoubleClick="@command('goToAprrove', url = each.urlMenuApproval)"/>
+<listcell label="@load(each.tableApprovalMessageHdrDto.trxId)" style="font-size : 11px; background-color : #DBD7D2;"  onDoubleClick="@command('goToAprrove', url = each.urlMenuApproval)"/>
+<listcell label="@load(each.menuName)" style="font-size : 11px; background-color : #DBD7D2;" onDoubleClick="@command('goToAprrove', url = each.urlMenuApproval)" />
+<listcell label="@load(each.namaKaryawan)" style="font-size : 11px; background-color : #DBD7D2;"  onDoubleClick="@command('goToAprrove', url = each.urlMenuApproval)"/>
+<listcell label="@bind(each.createdDate) @converter('formatedDate', format='dd/MM/yyyy')" style="font-size : 11px; background-color : #DBD7D2;"  onDoubleClick="@command('goToAprrove', url = each.urlMenuApproval)"/>
+</listitem>
+</template>
+</listbox>
+</div>
+
+</window>
+
+</zk>

@@ -1,0 +1,100 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  border="none" width="1000px" height="500px"
+    position="center,center" visible="@bind(vm.groupRefactorInfoForm)"  mode="highlighted" 
+    style = "background-color : transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+      
+    <div style = "width:130%; height:120%; background-color : black; position :relative; top : -16px; left : -16px; ">
+    
+    <image content="@load(vm.rocketLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="150px" height="150px" 
+		   style = "position : absolute; border-radius: 50%;
+		            top : 20px;
+		            left : 115px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>		
+    <image content="@load(vm.sateliteLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="150px" height="150px" 
+           style = "position : absolute;  border-radius: 50%;
+           top : 20px;
+           right : 350px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>	
+    
+    <div style="position :absolute; bottom : 140px; left : 90px;">
+    <vbox>
+    <button label="SAVE" onClick="@command('saveRefactor')" sclass="buttonFormInputNew" />
+    <button label="BACK" onClick="@command('backForm')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("formDetailStyle");
+    </attribute>
+    </button>
+    <button label="HELP" onClick="@command('helpForm')" sclass="buttonFormInputNew" >
+    <attribute name="onClick">
+    formDetail.setSclass("helpFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    </div>
+    
+    <div style = "position :absolute; bottom : 140px; right : 90px; ">
+    <vbox>
+    <button label="SHOW" onClick="@command('showProcedure')"  sclass="buttonFormInputNew"/>
+    <button label="RETURN" onClick="@command('returnProcedure')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("returnFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    
+    
+<!--   Start Form Detail  -->
+
+<!-- Header Start -->
+    <div id="formDetail" sclass="formDetailStyle">
+    <div style="display : inline-block; position : relative; left : 30px;" visible="@bind(vm.saatReturn)"> 
+    <div style = "position : relative; top : 12px; left : -30px ; width : 150%; height : 60px; 
+    background-color : #94C40F; border-bottom : 2px solid; border-bottom-color : green;">
+    <hbox>
+    <button iconSclass="z-icon-file" sclass="justForIcon"/>
+    <label value="Smart Form Ui" style = "font : 26px Comic Sans MS, cursive, sans-serif; color : white;"/>
+    </hbox>
+    </div>
+    <separator height="40px"/>
+<!-- Header End -->
+
+<!-- Body Start -->
+<div style="width:90%; overflow-y : auto;">
+    <listbox model="@bind(vm.tableConfigurationMenuDtosForDetail)" 
+    selectedItems="@bind(vm.selectedTableConfigurationMenuDtosForDetail)" checkmark="true"
+    mold="paging"  pagingPosition="bottom" pageSize="6" multiple="true"
+    sclass="listBoxIndex" sizedByContent="true">
+    <listhead>
+    <listheader style="text-align: center;font-size : 11px; background-color : #2D3234;"/>
+    <listheader label="NAMA KARYAWAN" style="text-align: center;font-size : 11px; background-color : #2D3234;" />
+    <listheader label="NAMA TOMBOL" style="text-align: center;font-size : 11px; background-color : #2D3234;" />
+    <listheader label="NAMA MENU" style="text-align: center;font-size : 11px; background-color : #2D3234;" />
+    </listhead>
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 11px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each.namaKaryawan)" style="font-size : 11px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each.buttonName)" style="font-size : 11px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each.menuName)" style="font-size : 11px; background-color : #DBD7D2;"/>
+    </listitem>
+    </template>
+    </listbox>
+ </div>   
+<!-- Body Start -->
+
+   
+    </div>
+    </div>
+<!--   End Form Detail  -->      
+    </window>
+</zk>

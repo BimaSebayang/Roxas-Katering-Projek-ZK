@@ -1,0 +1,363 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<include src="/StyleSheet/MenuUtama/MenuTransaksiStyle.zul"/>
+<include src="/StyleSheet/MessageBox/MessageBoxStyle.zul"/>
+<include src="/Constraint/CustomConstraintTransaksi.zul"/>
+<include src="/JavaScript/FormConstraintJs.zul"/>
+
+<window title="" border="normal" sclass="window-transaksi" 
+apply="org.zkoss.bind.BindComposer" 
+viewModel="@id('vm') @init('vmd.Transaksi.Regristrasi.MenuMasakanVmd')">
+ <caption Label = "REGRISTRASI PELANGGAN MANUAL" />
+ 
+ <separator height="10px"/>
+<include src="/menuUtama/ListExistingButton/listButton.zul"/>
+<separator height="10px"/>
+ <div  style="top : 20px; position : relative; background-color:black; width : 120px; height : 40px;"> 
+ <label value="Halaman " style="color : white; position :absolute; top : 10px; left : 30px;"/>
+</div>
+  <paging pageSize="10" mold="default" totalSize="@load(vm.totalElements)" activePage="@bind(vm.pageNum)" style="top : -22px; position : relative; left:120px; width : 88%;"
+	        onPaging="@command('slicePaging')"/> 
+<separator height="10px"/>
+<div style="position : relative; top : -3px; left : 0px;">
+	<textbox sclass="text-box-forgotPassword" value="@bind(vm.search)" onOK="@command('searchOrClick')" placeholder="Search..."/>
+	<button iconSclass="z-icon-search-plus" height= "33px" width = "33px" 
+	onClick="@command('searchOrClick')"  sclass="w3SearchButton"/>
+	<button label="Refresh" onClick="@command('refreshList')" 
+	        height= "35px" left="62%" iconSclass="z-icon-refresh" sclass="w3SearchButton" />   
+</div>
+
+<div style="overflow-x:auto;overflow-y:auto; width:100%;">
+<listbox sclass="listBoxIndex" model = "@bind(vm.tableMasterMenuMasakanDtos)"
+selectedItem="@bind(vm.tableMasterMenuMasakanDto)" checkmark="true"
+mold="paging" pagingPosition="bottom" pageSize="10" width = "120%">
+<listhead style="">
+<listheader  label="KODE MENU" sort="auto(kodePelanggan)" onSort="@command('sliceSorter', exec = '(a.kodePelanggan)')" 
+style="text-align: center;font-size : 11px; background-color : #2D3234;" >
+<button iconSclass="z-icon-filter"  onClick="@command('filter', exec = 'KODE MENU')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="NAMA MENU" sort="auto(namaPelanggan)" onSort="@command('sliceSorter', exec = '(a.namaPelanggan)')" 
+style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter"  onClick="@command('filter', exec = 'NAMA MENU')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="KODE RESEP" sort="auto(banyakPesanan)" onSort="@command('sliceSorter', exec = 'banyakPesanan')" 
+style="text-align: center; font-size : 11px; background-color :  #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'KODE RESEP')"
+style ="position:absolute;left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="STATUS MENU" sort="auto(statusPelanggan)" onSort="@command('sliceSorter', exec = '(c.mstCodeTypeName)')" 
+style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'STATUS MENU')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="STATUS PERSETUJUAN" sort="auto(statusPelanggan)" onSort="@command('sliceSorter', exec = '(c.mstCodeTypeName)')" 
+style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'STATUS PERSETUJUAN')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="TANGGAL PEMBUATAN" sort="auto(statusPersetujuan)" onSort="@command('sliceSorter', exec = '(b.mstCodeTypeName)')" 
+style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'TANGGAL PEMBUATAN')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important; border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+</listhead>
+<template name="model">
+<listitem >
+<listcell label="@bind(each.kodeMakanan)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.namaMakanan)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.kodeResep)" style="font-size : 11px; background-color : #DBD7D2; text-align : right;"/>
+<listcell label="@bind(each.statusMakanan)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.statusPersetujuan)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.createdDate) @converter('formatedDate', format='dd/MM/yyyy')" style="font-size : 11px; background-color : #DBD7D2;"/>
+</listitem>
+</template>
+</listbox>
+</div>
+
+<!-- bagian filter start -->
+<window id="modalDialog" width="350px" height="350px" 
+    position="center,center" visible="@bind(vm.onFilter)"
+    border="normal" sclass="filteringWindow" mode="modal" 
+    action="show: slideDown; hide: slideUp" shadow="false">
+    <caption id="filter" label="@bind(vm.filterTitle)" />
+    <div>
+    <button label="Ok" onClick="@command('okFilter', fold = filter.label)" sclass="filterOkButton"/>
+    <separator height="10px"/>
+    <div width="90%" height="90%" style ="overflow-x:auto; overflow-y:auto;">
+    <listbox model="@bind(vm.filterTableMasterMenuMasakanDto.namaMakanans)" sizedByContent="true"
+     checkmark="true" multiple="true" style=" border : none;" 
+     selectedItems="@bind(vm.tempFilterTableMasterMenuMasakanDto.namaMakanans)">
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableMasterMenuMasakanDto.kodeMakanans)" sizedByContent="true"
+     checkmark="true" multiple="true" style="border : none;" 
+     selectedItems="@bind(vm.tempFilterTableMasterMenuMasakanDto.kodeMakanans)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+    <listbox model="@bind(vm.filterTableMasterMenuMasakanDto.kodeReseps)" sizedByContent="true"
+     checkmark="true" multiple="true" style="border : none;" 
+     selectedItems="@bind(vm.tempFilterTableMasterMenuMasakanDto.kodeReseps)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableMasterMenuMasakanDto.statusMakanans)" sizedByContent="true"
+     checkmark="true" multiple="true" style=" border : none;" 
+     selectedItems="@bind(vm.tempFilterTableMasterMenuMasakanDto.statusMakanans)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableMasterMenuMasakanDto.statusPersetujuans)" sizedByContent="true"
+     checkmark="true" multiple="true" style="border : none;" 
+     selectedItems="@bind(vm.tempFilterTableMasterMenuMasakanDto.statusPersetujuans)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+    </div>
+    </div>
+</window>
+<!-- bagian filter end -->
+ 
+ 
+
+<window  id="lov" border="none" width="900px" height="600px" 
+    position="center,center" visible="@bind(vm.groupPageInfoForm)"  mode="highlighted" 
+    style = "background-color : transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+      
+<!--    viewModel="@id('vm') @init('vmd.Transaksi.MasterConfigurasiMenuVmd')" -->
+    
+    <div style = "width:130%; height:120%; background-color : #1A1814; position :relative; top : -16px; left : -16px; ">
+    
+    <image content="@load(vm.rocketLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+		   style = "position : absolute; border-radius: 50%;
+		            top : 2px; 
+    	            left : 15px; 
+                    border-width:2px;   
+                    border-color: #0A0E0F; 
+                    border-style: solid;"/>		
+    <image content="@load(vm.sateliteLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+           style = "position : absolute;  border-radius: 50%;
+           top : 2px;
+           right : 230px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>	
+    
+    <div style="position :absolute; top : 140px; left : 0px;">
+    <vbox>
+    <button label="SAVE" onClick="@command('saveForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah or vm.saatEdit)"/>
+    <button label="BACK" onClick="@command('backForm')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("formDetailStyle");
+    </attribute>
+    </button>
+    <button label="HELP" onClick="@command('helpForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah or vm.saatEdit)">
+    <attribute name="onClick">
+    formDetail.setSclass("helpFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    </div>
+    
+    <div style = "position :absolute; top : 160px; right : 14px; ">
+    <vbox>
+    <button label="SHOW" onClick="@command('showProcedure')"  sclass="buttonFormInputNew"/>
+    <button label="RETURN" onClick="@command('returnProcedure')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("returnFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    
+    <div style="background-color :black; width : 96.3%; height : 5px;
+    position : absolute;
+     display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-color : #0d0d12;
+    top : 280px;
+    left : 17px;"/>
+    
+   
+    <vbox id ="divForm" style="position : absolute;  top : 330px;
+    left : 18px;">
+    <button id="formulir1" onClick="@command('actionForm', valid = self.id)"
+     label="Form 1"  style = " position : relative; 
+     padding: 10px 20px; width : 160px;
+     background-color: #000000;
+	 font-size : 15px bold; height:80px;
+     padding: 10px 10px; 
+     cursor: pointer; " >
+     <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOut);
+     </attribute>
+    </button>
+    <button id="formulir2" label="Form 2" onClick="@command('actionForm', valid = self.id)"
+     style = "  color:  white ; 
+     position : relative;
+     background-color: #000000; height:80px;
+     padding: 10px 20px; width : 160px;
+	 font-size : 15px bold;
+     padding: 10px 10px; top : -5px;
+     cursor: pointer; ">
+      <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px;  top : -5px;" 
+    + " cursor: pointer; " ;
+        formulir2.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer;  top : -5px; " ;
+        formulir2.setStyle(styleOut);
+     </attribute>
+    </button>
+   
+    </vbox>
+    
+    
+    
+<!--   Start Form Detail  -->
+
+<!-- Header Start -->
+    <div id="formDetail" sclass="formDetailStyle">
+    <div style="display : inline-block; position : relative; left : 30px;" visible="@bind(vm.saatReturn)"> 
+    <div style = "position : relative; top : 0px; left : -30px ; width : 800px; height : 33px; 
+    background-color : #94C40F;">
+    <hbox>
+<!--     <button iconSclass="z-icon-file" sclass="justForIcon"/> -->
+<!--     <label value="Smart Form Ui" style = "font : 26px Comic Sans MS, cursive, sans-serif; color : white;"/> -->
+    </hbox>
+    </div>
+    <separator height="40px"/>
+<!-- Header End -->
+
+<!-- Body Start -->
+
+
+      
+<!--       form start -->
+
+      <div id = "form1" style="overflow:auto;" width="100%" height="550px" visible="@bind(vm.onForm1)" 
+      action="show: slideDown({duration: 500})">  
+      <label value="Form 1 : Informasi Umum Pelanggan"/>
+      <separator height="20px"/>
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterMenuMasakanDto.kodeMakanan)" 
+      width="350px" readonly="true" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+       <div sclass="panelForm"/>
+      <label value="Kode Makanan" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>  
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterMenuMasakanDto.namaMakanan)" 
+      width="350px" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+      <div sclass="panelForm"/>
+      <label value="Nama Makanan" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>  
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterMenuMasakanDto.kodeResep)" 
+      width="350px" readonly="true" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+       <div sclass="panelForm"/>
+      <label value="Kode Resep" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>  
+       <vbox>
+      <textbox rows="5"
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterMenuMasakanDto.keterangan)" 
+      width="350px" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+       <div sclass="panelForm"/>
+      <label value="Keterangan" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>  
+      </div>
+
+      <div id = "form2" style="overflow:auto;" width="100%" height="550px"  visible="@bind(vm.onForm2)"
+      action="show: slideDown({duration: 500})">  
+       <label value="Form 2 : Informasi Gambar Masakan"/>
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterMenuMasakanDto.gambarMenu)" 
+      width="350px" readonly="true" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+       <div sclass="panelForm"/>
+      <label value="Kode Pelanggan" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>  
+      </div>      
+<!--       form end -->
+      
+     
+<!-- Body Start -->
+
+   
+    </div>
+    </div>
+<!--   End Form Detail  -->   
+
+    </window>
+
+    
+    
+   
+ 
+</window>
+</zk>

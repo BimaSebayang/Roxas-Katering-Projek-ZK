@@ -1,0 +1,13 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style>
+.myMessagebox{
+ background-color : #73AD21;
+ border-width:3px;  
+ border-color: #73AD21;
+ border-style: solid;
+}
+
+
+</style>
+</zk>

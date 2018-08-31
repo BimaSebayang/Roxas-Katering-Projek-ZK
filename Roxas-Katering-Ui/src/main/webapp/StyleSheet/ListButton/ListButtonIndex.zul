@@ -1,0 +1,58 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style>
+.divButtonIndex{
+position : relative;
+right : 0px;
+top : 0px;
+}
+
+.collapsible {
+  background-color: #2D3234;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition :  background-color 0.7s;
+}
+
+
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+.defaultContent{
+  height : 0px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.content{
+  overflow: hidden;
+  background-color: #f1f1f1;
+  animation: show 0.75s forwards;
+}
+
+@keyframes show {
+     from{ height  : 0px; }
+    to{height : 135px;}
+}
+
+.contentHide{
+  overflow: hidden;
+  background-color: #f1f1f1;
+  animation :  hide 0.75s forwards;
+}
+
+@keyframes hide {
+     from{ height  : 135px; }
+    to{height : 0px;}
+}
+
+
+</style>
+</zk>

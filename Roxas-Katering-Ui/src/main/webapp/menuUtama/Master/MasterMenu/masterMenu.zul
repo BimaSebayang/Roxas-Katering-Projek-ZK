@@ -1,0 +1,187 @@
+<?page title="Master Menu" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="@load(vm.tableMenuDto.menuName)" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('vmd.master.masterMenu.MasterMenuVmd')" height="100%" width="100%">
+		<hbox>
+			<!-- buat Menampilkan Button Yang Ada -->
+			<include src="ListExistingButton/listButton.zul" />
+			<!-- buat Menampilkan Button Yang Ada -->
+			<combobox model="@load(vm.globalVariablesForStatus)"
+				onSelect="@command('selectedCombo')"
+				selectedItem="@bind(vm.globalVariableForStatus)">
+				<template name="model">
+					<comboitem label="@load(each.mstCodeTypeName)"
+						value="@bind(each.mstCodeType)" />
+				</template>
+			</combobox>
+		</hbox>
+		<listbox model="@load(vm.loadAllMenu)"
+			selectedItem="@bind(vm.loadSelectedMenu)" mold="paging"
+			pagingPosition="bottom" pageSize="10">
+			<listhead>
+				<listheader label="KODE MENU " />
+				<listheader label="NAMA MENU " />
+				<listheader label="STATUS " />
+				<listheader label="KETERANGAN " />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@bind(each.menuCode)" />
+					<listcell label="@bind(each.menuName)" />
+					<listcell label="@bind(each.statusName)" />
+					<listcell label="@bind(each.notes)" />
+				</listitem>
+			</template>
+		</listbox>
+
+
+		<window title="@load(vm.tableMenuDto.menuName)" width="50%"
+			height="50%" mode="modal" visible="@load(vm.onTambah)">
+			<hlayout style="float:right">
+				<button label="KEMBALI" onClick="@command('kembali')" />
+				<button label="SIMPAN" onClick="@command('simpan')" />
+			</hlayout>
+			<div>
+				<grid>
+					<columns>
+						<column width="125px" />
+						<column width="500px" />
+					</columns>
+					<rows>
+						<row>
+							<label value=" KODE MENU : " />
+							<hbox>
+								<textbox
+									value="@load(vm.menuDtoForTambah.menuCode)"
+									placeholder="GENERATE AUTO" disabled="true" />
+							</hbox>
+						</row>
+						<row>
+							<label value=" NAMA MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuName)"
+									placeholder="WAJIB DIISI" style="text-transform:uppercase" />
+							</hbox>
+						</row>
+						<row>
+							<label value=" KETERANGAN : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.notes)" />
+							</hbox>
+						</row>
+						<row>
+							<label value=" LOKASI MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuUrl)"
+									placeholder="WAJIB DIISI" />
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</div>
+		</window>
+		
+		<window title="@load(vm.tableMenuDto.menuCode)" width="50%"
+			height="50%" mode="modal" visible="@load(vm.onEdit)">
+			<hlayout style="float:right">
+				<button label="KEMBALI" onClick="@command('kembali')" />
+				<button label="SIMPAN" onClick="@command('simpan')" />
+			</hlayout>
+			<div>
+				<grid>
+					<columns>
+						<column width="125px" />
+						<column width="500px" />
+					</columns>
+					<rows>
+						<row>
+							<label value=" KODE MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuCode)"
+									placeholder="GENERATE AUTO" disabled="true"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" NAMA MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuName)"
+									placeholder="WAJIB DIISI" style="text-transform:uppercase"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" KETERANGAN : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.notes)" />
+							</hbox>
+						</row>
+						<row>
+							<label value=" LOKASI MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuUrl)"
+									placeholder="WAJIB DIISI" />
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</div>
+		</window>
+		
+		<window title="@load(vm.tableMenuDto.menuCode)" width="50%"
+			height="50%" mode="modal" visible="@load(vm.onView)">
+			<hlayout style="float:right">
+				<button label="KEMBALI" onClick="@command('kembali')" />
+			</hlayout>
+			<div>
+				<grid>
+					<columns>
+						<column width="125px" />
+						<column width="500px" />
+					</columns>
+					<rows>
+						<row>
+							<label value=" KODE MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuCode)"
+									placeholder="GENERATE AUTO" disabled="true"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" NAMA MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuName)"
+									placeholder="WAJIB DIISI" style = "text-transform:uppercase" disabled="true"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" KETERANGAN : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.notes)" disabled="true"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" LOKASI MENU : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.menuDtoForTambah.menuUrl)"
+									placeholder="WAJIB DIISI" disabled="true"/>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</div>
+		</window>
+		
+
+	</window>
+</zk>

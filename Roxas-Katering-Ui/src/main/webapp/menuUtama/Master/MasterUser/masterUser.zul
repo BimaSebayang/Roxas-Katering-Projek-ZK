@@ -1,0 +1,86 @@
+<?page title="MASTER USER" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="@load(vm.tableMenuDto.menuName)" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('vmd.master.masterUser.MasterUserVmd')" height="100%" width="100%">
+		<hbox>
+			<!-- buat Menampilkan Button Yang Ada -->
+			<include src="ListExistingButton/listButton.zul" />
+			<!-- buat Menampilkan Button Yang Ada -->
+
+			<combobox model="@load(vm.globalVariablesForStatus)"
+				onSelect="@command('selectedCombo')"
+				selectedItem="@bind(vm.globalVariableForStatus)">
+				<template name="model">
+					<comboitem label="@load(each.mstCodeTypeName)"
+						value="@bind(each.mstCodeType)" />
+				</template>
+			</combobox>
+		</hbox>
+		<listbox model="@load(vm.loadAllUser)" selectedItem="@bind(vm.loadSelectedUser)" 
+		mold="paging" pagingPosition="bottom" pageSize="10">
+			<listhead>
+				<listheader label="USER ID" />
+				<listheader label="STATUS USER" />
+				<listheader label="NAMA USER" />
+				<listheader label="NOMOR PENGGAWAI" />
+				<listheader label="TANGGAL DIBUAT" />
+				<listheader label="NAMA PEMBUAT" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@bind(each.userId)" />
+					<listcell label="@bind(each.statusUser)" />
+					<listcell label="@bind(each.pegawaiName)" />
+					<listcell label="@bind(each.pegawaiId)" />
+					<listcell
+						label="@bind(each.createdDate) @converter('formatedDate', format='dd/MM/yyyy, HH:MM')" />
+					<listcell label="@bind(each.createdByName)" />
+				</listitem>
+			</template>
+		</listbox>
+
+		<window title="@load(vm.tableMenuDto.menuName)"  width="50%" height="50%" mode="modal"
+			visible="@load(vm.onTambah)">
+			<hlayout style="float:right">
+				<!-- SEARCH BOX AREA START -->
+				<button label="KEMBALI"
+					onClick="@command('kembali')" />
+				<button label="SIMPAN"
+					onClick="@command('simpanDariTambah')" />
+				<!-- SEARCH BOX AREA END -->
+			</hlayout>
+			<div>
+			<grid>
+			<columns>
+			<column width="125px" />
+			<column width="500px" />
+			</columns>
+			<rows>
+			<row>
+			<label value=" PEGAWAI : "/>
+			<hbox>
+			<textbox value="@load(vm.userDtoForTambah.pegawaiId) @save(vm.userDtoForTambah.pegawaiId, before='simpanDariTambah')"/>
+			<button label="Tambah" sclass="btn-index" onClick = "@command('popUpPegawai')"/>
+			<textbox value="@load(vm.userDtoForTambah.pegawaiName) @save(vm.userDtoForTambah.pegawaiName, before='simpanDariTambah')"/>
+			</hbox>
+			</row>
+			<row>
+			<label value=" USER ID : "/>
+			<hbox>
+			<textbox value="@load(vm.userDtoForTambah.userId) @save(vm.userDtoForTambah.userId, before='simpanDariTambah')"/>
+			</hbox>
+			</row>
+			<row>
+			<label value=" STATUS : "/>
+			<checkbox onCheck="@command('cekStatus')" value=" AKTIF " checked="@bind(vm.cekBox)"/>
+			</row>
+			</rows>
+			</grid>
+			</div>
+		</window>
+
+
+	</window>
+
+</zk>

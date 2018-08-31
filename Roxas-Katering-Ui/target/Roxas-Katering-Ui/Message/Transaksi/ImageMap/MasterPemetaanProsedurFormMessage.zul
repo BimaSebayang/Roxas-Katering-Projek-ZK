@@ -1,0 +1,652 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  id = "lov" border="none" style = "background-color : transparent;"  apply="org.zkoss.bind.BindComposer" 
+viewModel="@id('vm') @init('vmd.Message.Transaksi.ImageMap.MasterPemetaanProsedurFormMessageVmd')"
+    action="show: slideIn; hide: slideOut" shadow="false" position="center,center" width="900px" height="600px">
+      
+
+
+     <div style = "width:130%; height:120%; background-color : #1A1814; position :relative; top : -16px; left : -16px; ">
+    
+    <include src="/StyleSheet/MenuUtama/MenuTransaksiStyle.zul"/>
+<include src="/StyleSheet/MessageBox/MessageBoxStyle.zul"/>
+<include src="/Constraint/CustomConstraintTransaksi.zul"/>
+<include src="/JavaScript/FormConstraintJs.zul"/>    
+    
+    <image content="@load(vm.rocketLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+		   style = "position : absolute; border-radius: 50%;
+		            top : 2px; 
+    	            left : 15px; 
+                    border-width:2px;   
+                    border-color: #0A0E0F; 
+                    border-style: solid;"/>		
+    <image content="@load(vm.sateliteLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+           style = "position : absolute;  border-radius: 50%;
+           top : 2px;
+           right : 230px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>	
+    
+     <div style="position :absolute; top : 140px; left : 0px;">
+    <vbox>
+    <button label="SETUJU" onClick="@command('approvedForm', destroy = lov)"  sclass="buttonFormInputNew"/>
+    <button label="REVISI" onClick="@command('revisedForm', destroy = lov)"  sclass="buttonFormInputNew"/>
+    <button label="TOLAK" onClick="@command('rejectedForm', destroy = lov)"  sclass="buttonFormInputNew"/>
+    <button label="BACK" onClick="@command('destroyMessage', destroy = lov)"  sclass="buttonFormInputNew"/>
+    </vbox>
+    </div>
+    </div>
+    <div style = "position :absolute; top : 160px; right : 14px; ">
+    <vbox>
+    <button label="SHOW" onClick="@command('showProcedure')"  sclass="buttonFormInputNew"/>
+    <button label="RETURN" onClick="@command('returnProcedure')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("returnFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    
+ 
+    
+   
+    <vbox id ="divForm" style="position : absolute;  top : 330px;
+    left : 18px;">
+    <button id="formulir1" onClick="@command('actionForm', valid = self.id)"
+     label="Form 1"  style = " position : relative; 
+     padding: 10px 20px; width : 160px;
+     background-color: #000000;
+	 font-size : 15px bold; height:80px;
+     padding: 10px 10px; 
+     cursor: pointer; " >
+     <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOut);
+     </attribute>
+    </button>
+    <button id="formulir2" label="Form 2" onClick="@command('actionForm', valid = self.id)"
+     style = "  color:  white ; 
+     position : relative;
+     background-color: #000000; height:80px;
+     padding: 10px 20px; width : 160px;
+	 font-size : 15px bold;
+     padding: 10px 10px; top : -5px;
+     cursor: pointer; ">
+      <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px;  top : -5px;" 
+    + " cursor: pointer; " ;
+        formulir2.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer;  top : -5px; " ;
+        formulir2.setStyle(styleOut);
+     </attribute>
+    </button>
+    </vbox>
+    
+    
+    
+<!--   Start Form Detail  -->
+
+<!-- Header Start -->
+    <div id="formDetail" sclass="formDetailStyle">
+    <div style="display : inline-block; position : relative; left : 30px;" visible="@bind(vm.saatReturn)"> 
+    <div style = "position : relative; top : 0px; left : -30px ; width : 800px; height : 33px; 
+    background-color : #94C40F;">
+    <hbox>
+<!--     <button iconSclass="z-icon-file" sclass="justForIcon"/> -->
+<!--     <label value="Smart Form Ui" style = "font : 26px Comic Sans MS, cursive, sans-serif; color : white;"/> -->
+    </hbox>
+    </div>
+    <separator height="40px"/>
+<!-- Header End -->
+
+<!-- Body Start -->
+
+
+      
+<!--       form start -->
+
+      <div id = "form1" style="overflow:auto;" width="100%" height="550px" visible="@bind(vm.onForm1)" 
+      action="show: slideDown({duration: 500})">  
+      <label value="Form 1 : Informasi Umum Prosedur"/>
+      <separator height="40px"/>
+      <div style="position : relative; left : 130px;">
+      <vbox>
+      <textbox id="prosedurId" value="@bind(vm.tableMasterProsedurformHdrDto.prosedurId)" 
+       placeholder="GENERATE OTOMATIS" readonly="true" width="350px" maxlength="200" sclass="textboxFormInput"/>
+      <div sclass="panelForm" id="PanelprosedurId"/>
+      <label value="Prosedur Id" sclass="labelFormInput"  id="LabelprosedurId"/>
+      </vbox>
+      <separator height="20px"/>
+      <vbox>
+      <textbox id="namaProsedur" value="@load(vm.tableMasterProsedurformHdrDto.prosedurName) @save(vm.tableMasterProsedurformHdrDto.prosedurName, before={'saveForm'})" 
+       placeholder="Maksimal Karakter 50" width="350px" maxlength="50" sclass="textboxFormInput" onChange="self.setValue(self.getValue().toUpperCase())"
+       constraint="@bind(vm.consCheckProsedurName)" readonly="true"/>
+       <div sclass="panelForm" id="PanelnamaProsedur"/>
+      <label value="Nama Prosedur" sclass="labelFormInput"  id="LabelnamaProsedur"/>
+      </vbox>
+      <separator height="20px"/>
+      <vbox>
+      <textbox id="totalProsedur" value="@bind(vm.tableMasterProsedurformHdrDto.totalProsedur)" 
+       placeholder="GENERATE OTOMATIS" width="350px" maxlength="50" sclass="textboxFormInput" 
+       onChange="self.setValue(self.getValue().toUpperCase())" readonly="true" />
+       <div sclass="panelForm" id="PaneltotalProsedur"/>
+      <label value="Total Prosedur" sclass="labelFormInput"  id="LabeltotalProsedur"/>
+      </vbox>
+      
+      <separator height="20px"/>
+      <vbox>
+      <hbox>
+       <textbox id="menuPerihal" value="@load(vm.tableMasterProsedurformHdrDto.menuCode) @save(vm.tableMasterProsedurformHdrDto.menuCode, before={'saveForm'})"  
+       placeholder="Kode Menu"  maxlength="50" sclass="textboxFormInput" width="145px" constraint="@bind(vm.formConstraint.consNullValue)"
+       onChange="self.setValue(self.getValue().toUpperCase())" readonly="true" />
+       <button iconSclass="z-icon-crosshairs centerFormInput" onClick="@command('callMenuId')" height="36px" disabled="true" sclass="buttonFormInput"/>
+       <textbox  value="@load(vm.tableMasterProsedurformHdrDto.menuReferensi) @save(vm.tableMasterProsedurformHdrDto.menuReferensi, before={'saveForm'})"  
+       placeholder="Nama Menu" maxlength="50" sclass="textboxFormInput"  width="145px"
+       onChange="self.setValue(self.getValue().toUpperCase())" readonly="true" />
+      </hbox> 
+       <div sclass="panelForm" id="PanelmenuPerihal"/>
+      <label value="Informasi Perihal Menu" sclass="labelFormInput"  id="LabelmenuPerihal"/>
+      </vbox>
+      </div>
+      </div>
+      
+      <div id = "form2" style="overflow:auto;" width="100%" height="550px"  visible="@bind(vm.onForm2)"
+      action="show: slideDown({duration: 500})">  
+      <label value="Form 2 : Informasi Detail Prosedur"/>
+     
+<div style="position : relative; left:45px;">    
+ <separator height="30px"/>
+ <button label="Tambah Prosedur" onClick="@command('addProsedur')" height="36px" disabled="true" sclass="buttonFormInput2"/>
+ <separator height="30px"/> 
+<listbox sclass="listBoxIndex" model = "@bind(vm.tableMasterProsedurformDtlDtos)"
+selectedItem="@bind(vm.tableMasterProsedurformDtlDto)"
+mold="paging" pagingPosition="bottom" pageSize="5" width = "70%" >
+<listhead style="">
+<listheader label="URUTAN PROSEDUR" sort="auto(prosedurSeq)" style="text-align: center; font-size : 11px; background-color :   #2D3234;"/>
+<listheader label="DETAIL PROSEDUR" sort="auto(detailGambar)" style="text-align: center; font-size : 11px; background-color :   #2D3234;"/>
+<listheader label="NAMA DETAIL PROSEDUR" sort="auto(detailName)" style="text-align: center; font-size : 11px; background-color :   #2D3234;"/>
+</listhead>
+<template name="model">
+<listitem >
+<listcell label="@bind(each.prosedurSeq)" style="text-align: center; font-size : 11px; background-color : #DBD7D2;"/>
+<listcell><image content="@load(each.detailGambar) @converter('Master.Converter.ImageToZkImageConverter')"
+width="100%" height="100%" onClick="@command('lookPicture', seePic = self.content)"/></listcell>
+<listcell label="@bind(each.detailName)" style="text-align: center; font-size : 11px; background-color : #DBD7D2;"/>
+</listitem>
+</template>
+</listbox>
+</div> 
+</div>      
+      
+<!--       form end -->
+      
+     
+<!-- Body Start -->
+
+   
+    </div>
+    </div>
+    
+<!--   End Form Detail  -->   
+
+<!-- Start Crud Pemetaan Prosedur -->
+
+<window visible="@bind(vm.onPemetaanProsedur)" id="crud" border="none" width="900px" height="600px" 
+    position="center,center"  mode="highlighted" style = "background-color:transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+    
+<div style="position : absolute; top : 0px; left : 0px; background-color:#999999; width:100%; height:120%">
+<div style="position : relative; top : 8px; left : 10px; background-color:#999999;display: flex; 
+   align-items: center; color : white;
+   justify-content: center"> <button iconSclass="z-icon-upload justIcon" sclass="justForIcon"/>
+   <label value="UP" style="font-family:arial; font-size : 35px;"/><label value="LOAD" style="font-family:arial; font-size : 28px; color : #e7f8e5;"/>
+   <div style="position : absolute; top : 5px; right : 20px; ">
+   <button iconSclass="z-icon-times-circle justIcon" sclass = "justForIcon" onClick="@command('backFormPemetaan')"/>
+   </div>
+</div>
+   
+<div style="position : relative; top :20px; background-color:white; width:100%; height:530px;">
+
+<div style="position : absolute; top : 70px; left : 10px; " >
+<div style = " position : absolute; top : -40px; left : 0px; height : 30px; 
+       background-color :black ; width : 120px; display: flex; 
+       align-items: center; overflow:auto; cursor: pointer; 
+       justify-content: center;  position : absolute; ">
+<label value="Tagout Pin" style = "color:white;"/>
+</div>
+<button onClick="@command('selectedPin', pin = self.id)" label="Verified" style = "  color:blue ; 
+     position : absolute; border: 1px solid blue;
+     background-color: white; height:80px;box-shadow: 5px 10px;
+     padding: 10px 20px; width : 120px; text-align: right;
+	 font-size : 15px bold;
+     padding: 10px 10px; border-color
+     cursor: pointer; " top="0px" id="Steady">
+<attribute name="onMouseOver">
+String styleOver = "  color:#79cc5c ; "
+    + " position : absolute; border: 1px solid #79cc5c; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; "; 
+     
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Steady.getStyle().equalsIgnoreCase(styleClick)){
+           Steady.setStyle(styleClick); 
+ }   
+ else{
+ Steady.setStyle(styleOver); 
+ }
+</attribute>
+<attribute name="onMouseOut">
+ String styleOver = "  color:blue ; "
+    + " position : absolute; border: 1px solid blue; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Steady.getStyle().equalsIgnoreCase(styleClick)){
+           Steady.setStyle(styleClick); 
+ }   
+ else{
+ Steady.setStyle(styleOver); 
+ }
+</attribute>
+
+<attribute name="onClick">
+ String styleOverWarning = "  color:red ; "
+    + " position : absolute; border: 1px solid red; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+    
+ String styleOverSignaled = "  color:orange ; "
+    + " position : absolute; border: 1px solid orange; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";    
+    
+String styleOver = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+ Steady.setStyle(styleOver);
+ Signaled.setStyle(styleOverSignaled);
+ Warning.setStyle(styleOverWarning); 
+</attribute>
+
+</button>
+<image content="@load(vm.mapChildLocks.get('Steady')) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="40px" height="50px" style = "position : absolute ; top : 10px; left : 5px; cursor: pointer;"/>	
+		        
+<button onClick="@command('selectedPin', pin = self.id)" label="Warning" style = " color:  orange ; 
+     position : absolute; border: 1px solid orange;
+     background-color: white; height:80px;box-shadow: 5px 10px;
+     padding: 10px 20px; width : 120px;
+	 font-size : 15px bold; text-align: right;
+     padding: 10px 10px; 
+     cursor: pointer; " top="100px" id="Signaled">
+
+<attribute name="onMouseOver">
+String styleOver = "  color:#79cc5c ; "
+    + " position : absolute; border: 1px solid #79cc5c; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; "; 
+     
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Signaled.getStyle().equalsIgnoreCase(styleClick)){
+           Signaled.setStyle(styleClick); 
+ }   
+ else{
+ Signaled.setStyle(styleOver); 
+ }
+</attribute>
+<attribute name="onMouseOut">
+ String styleOver = "  color:orange ; "
+    + " position : absolute; border: 1px solid orange; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Signaled.getStyle().equalsIgnoreCase(styleClick)){
+           Signaled.setStyle(styleClick); 
+ }   
+ else{
+ Signaled.setStyle(styleOver); 
+ }
+</attribute>
+
+<attribute name="onClick">
+String styleOver = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+
+ String styleOverSteady = "  color:blue ; "
+    + " position : absolute; border: 1px solid blue; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";      
+    
+String styleOverWarning = "  color:red ; "
+    + " position : absolute; border: 1px solid red; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; "; 
+        
+Signaled.setStyle(styleOver); 
+Steady.setStyle(styleOverSteady);
+Warning.setStyle(styleOverWarning);
+</attribute>     
+     
+</button>
+<image content="@load(vm.mapChildLocks.get('Signaled')) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="40px" height="50px" style = "position : absolute ; top : 110px; left : 5px; cursor: pointer;"/>	       
+
+<button onClick="@command('selectedPin', pin = self.id)" label="Error" style = "  color:  red ; 
+     position : absolute;border: 1px solid red;
+     background-color: white; height:80px;
+     padding: 10px 20px; width : 120px;box-shadow: 5px 10px;
+	 font-size : 15px bold; text-align: right;
+     padding: 10px 10px; 
+     cursor: pointer; " top="200px" id = "Warning">
+     
+     <attribute name="onMouseOver">
+String styleOver = "  color:#79cc5c ; "
+    + " position : absolute; border: 1px solid #79cc5c; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; "; 
+     
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Warning.getStyle().equalsIgnoreCase(styleClick)){
+           Warning.setStyle(styleClick); 
+ }   
+ else{
+ Warning.setStyle(styleOver); 
+ }
+</attribute>
+<attribute name="onMouseOut">
+ String styleOver = "  color:red ; "
+    + " position : absolute; border: 1px solid red; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+
+ String styleClick = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";     
+    
+ if(Warning.getStyle().equalsIgnoreCase(styleClick)){
+           Warning.setStyle(styleClick); 
+ }   
+ else{
+ Warning.setStyle(styleOver); 
+ }
+</attribute>
+
+<attribute name="onClick">
+
+ String styleOverSteady = "  color:blue ; "
+    + " position : absolute; border: 1px solid blue; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";      
+
+ String styleOverSignaled = "  color:orange ; "
+    + " position : absolute; border: 1px solid orange; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";    
+
+String styleOver = "  color:#00ff05 ; "
+    + " position : absolute; border: 1px solid #00ff05; "
+    + " background-color: white; height:80px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+Warning.setStyle(styleOver); 
+Steady.setStyle(styleOverSteady);
+Signaled.setStyle(styleOverSignaled);
+</attribute>     
+     
+</button>
+<image content="@load(vm.mapChildLocks.get('Warning')) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="40px" height="50px" style = "position : absolute ; top : 210px; left : 5px; cursor: pointer;"/>	
+
+<button label="Refresh" iconSclass="z-icon-undo" onClick="@command('undoUpload')" style = "  color: white ; 
+     position : absolute;
+     background-color: green; height:50px;
+     padding: 10px 20px; width : 120px;
+	 font-size : 8px bold;
+     padding: 10px 10px; 
+     cursor: pointer; " top="300px">
+ <attribute name="onClick">
+  String styleOverSteady = "  color:blue ; "
+    + " position : absolute; border: 1px solid blue; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";      
+
+ String styleOverSignaled = "  color:orange ; "
+    + " position : absolute; border: 1px solid orange; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";    
+
+ String styleOver = "  color:red ; "
+    + " position : absolute; border: 1px solid red; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+Warning.setStyle(styleOver); 
+Steady.setStyle(styleOverSteady);
+Signaled.setStyle(styleOverSignaled);
+ </attribute>    
+</button>   
+<button label="Simpan" iconSclass="z-icon-camera" style = "  color: white ; 
+     position : absolute;
+     background-color: green; height:50px;
+     padding: 10px 20px; width : 120px;
+	 font-size : 8px bold;
+     padding: 10px 10px; 
+     cursor: pointer; " top="360px" onClick="@command('savePicture')" >
+  <attribute name="onClick">
+  String styleOverSteady = "  color:blue ; "
+    + " position : absolute; border: 1px solid blue; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";      
+
+ String styleOverSignaled = "  color:orange ; "
+    + " position : absolute; border: 1px solid orange; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";    
+
+ String styleOver = "  color:red ; "
+    + " position : absolute; border: 1px solid red; "
+    + " background-color: white; height:80px;box-shadow: 5px 10px; "
+    + " padding: 10px 20px; width : 120px; text-align: right; "
+	+ " font-size : 15px bold;" 
+    + " padding: 10px 10px; border-color" 
+    + " cursor: pointer; ";  
+Warning.setStyle(styleOver); 
+Steady.setStyle(styleOverSteady);
+Signaled.setStyle(styleOverSignaled); 
+  </attribute>      
+     
+</button>     
+</div>
+
+<div id="check" width="540px" height="450px" style="background-color : transparent; 
+   position : absolute; top : 30px; left : 150px; border : 3px solid; display: flex; 
+   align-items: center; overflow:auto; cursor: pointer; 
+   justify-content: center; border-style:dashed;" >
+<div style="background-color :transparent; width : 100%; height : 100%;
+   position : absolute; top : 0px; left : 0px; display: flex; 
+   align-items: center; overflow:auto; cursor: pointer; 
+   justify-content: center;">
+   <button upload="true,maxsize=-1,native" onUpload="@command('onPhotoUpload')" label="UPLOAD PHOTO" iconSclass="z-icon-photo" orient="vertical" height="100px"/>
+</div>    
+<image content="@load(vm.initPic) @converter('Master.Converter.ImageToZkImageConverter')" 
+						 style = "position : absolute;" onClick="@command('checkCoor')"/>						
+</div>
+
+
+<listbox model="@load(vm.historyPin.entrySet())" style="position : absolute; top : 28px;right : 10px;
+ width : 190px; height : 452px; border : 1px solid green;" droppable="true"  onClick="@command('firstClick')" onDrop="@command('onDropping')"> 
+<template name="model">
+<listitem draggable="true" droppable="true"  onClick="@command('firstClick')" onDrop="@command('onDropping')">
+<listcell><image content="@load(each.getValue()) @converter('Master.Converter.ImageToZkImageConverter')"
+width="100%" height="100%" onClick="@command('lookPicture', seePic = self.content)"/>
+</listcell>
+</listitem>
+</template>
+</listbox>
+
+</div>
+
+</div>
+</window>
+
+<!-- End Crud Pemetaan Prosedur -->
+
+<!-- Start Crud Input Nama -->
+<window visible="@bind(vm.onFilledName)" border="none" width="590px" height="250px" 
+    position="center,center"  mode="highlighted" style = "background-color:transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+<div style="background-color : #DDDCD2; position : absolute; width : 300px; height : 100%; top : -5px; left : -10px;">
+<label value="Input" style="font : 40px arial; color : white ; position : absolute; top : 30px; left : 40px;"/>
+<label value="Detail" style="font : 40px arial; color : white ; position : absolute; top : 75px; left : 40px;"/>
+<label value="Nama" style="font : 40px arial; color : white ; position : absolute; top : 115px; left : 40px;"/>
+<button label="Simpan" style="font : 18px arial; color : white ; position : absolute; bottom : 20px; left : 40px;" onClick="@command('saveProsedur')"/>
+<button label="Batal" style="font : 18px arial; color : white ; position : absolute; bottom : 20px; left : 185px;" onClick="@command('cancelForm')"/>
+</div>
+
+<div style=" top : 60px; right : 30px; position : absolute;">
+ <vbox>
+      <textbox id="namaDetail" value="@load(vm.detailName) @save(vm.detailName, before={'saveProsedur'})" 
+       placeholder="Maksimal Karakter 50" width="250px" maxlength="50" sclass="textboxFormInput" onChange="self.setValue(self.getValue().toUpperCase())"
+       constraint="@bind(vm.consCheckDetailName)" readonly="@bind(vm.saatLihat)"/>
+       <div sclass="panelForm" id="PanelnamaDetail"/>
+      <label value="Nama Detail Prosedur" sclass="labelFormInput"  id="LabelnamaDetail"/>
+      </vbox>
+</div>
+
+</window>
+<!-- End Crud Input Nama -->
+
+</window>
+
+
+</zk>

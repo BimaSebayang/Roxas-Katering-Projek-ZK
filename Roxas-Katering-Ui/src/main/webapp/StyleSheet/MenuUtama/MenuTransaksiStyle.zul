@@ -1,0 +1,325 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style>
+
+.z-textbox-disd{ color: black!important; }
+
+.filterOkButton{
+  background-color: #2D3234;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.filterOkButton:hover {
+  background-color: blue;
+}
+
+.buttonFormInput2{
+width : 30%;
+height : 80%;
+border-color : #00840B;
+background-color : #00FF0B;
+}
+
+.z-textbox{
+        border: 1px solid #82E98C;
+    	text-transform:uppercase;
+    }
+    
+  
+    
+.window-transaksi{
+height : 100%;
+width : 100%;
+overflow:auto;
+border-style: ridge;
+    border-top-width: 7px;
+    border-top-color: green;
+    border-left-width: 7px;
+    border-right-color: green;
+}
+
+ .z-caption{
+  height:24px;
+  padding: 0 4px 0 22px;
+  margin-top: 4px;
+}
+
+.filteringWindow{
+ background-color : white;
+ border-width:5px;  
+ border-color: #2D3234;;
+ border-style: solid;
+}
+
+.listBoxIndex{
+overflow-x:auto;
+overflow-y:auto;
+border-color : green;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.z-listheader-sorticon {
+    right:3px !important;
+  }
+  .z-icon-caret-down, .z-icon-caret-up {
+    position:absolute;
+    right:0px;
+    top:13px;
+  }
+
+.z-listcell {
+    background: #131313;
+}
+
+.listHeader{
+font-size : 12px;
+}
+
+.panelForm{
+position : relative; background-color : #94C40F; height : 3px; width : 100%;
+}
+
+.panelFormInvalid{
+position : relative; background-color : red; height : 3px; width : 100%;
+}
+
+/* An indicator to represent current scroll position */
+.z-scrollbar-horizontal .z-scrollbar-indicator {
+    background: #3AA4C3;
+    border: none;
+    top: 2px;
+}
+/* A rail to slide indicator */
+.z-scrollbar-horizontal .z-scrollbar-rail {
+    background: #FFFFFF;
+}
+/* remove font icon */
+.z-scrollbar-horizontal .z-scrollbar-icon {
+    display: none;
+}
+
+.z-icon-search-plus{
+    width: 2px;
+    height: 2px;
+    position: relative;
+    left: -8px;
+    top : -3px;
+}
+
+.w3SearchButton{
+text-align:center;
+cursor:pointer; color:#fff!important;background-color:#000!important;
+position:relative; }
+
+.w3PagingButton{
+position:relative;
+}
+.w3left-button
+{border:none;display:inline-block;padding:8px 16px;
+vertical-align:middle;overflow:hidden;text-decoration:none;
+color:inherit;background-color:inherit;text-align:center;
+cursor:pointer; color:#fff!important;background-color:#000!important;
+white-space:nowrap;
+position:relative;top:50%;left:40px; transform:translate(0%,-50%);}
+
+.helpFormOnClick{
+width:80%; height:100%; 
+background-color : white;
+position :absolute; top : -16.5px; right :0px; overflow:hidden;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation: slideL 0.5s forwards;
+    animation: slideL 0.75s forwards;
+}
+
+@-webkit-keyframes slideL {
+    100% {right: 165px; }
+}
+
+@keyframes slideL {
+    100% {right: 165px; }
+}
+
+.returnFormOnClick{
+width:80%; height:100%; 
+background-color : white;
+position :absolute; top : -16.5px; right :165px; overflow:hidden;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation: slideL 0.5s forwards;
+    animation: slideR 0.75s forwards;
+}
+
+@-webkit-keyframes slideR {
+    100% { right: 0x; }
+}
+
+@keyframes slideR {
+    100% { right: 0px; }
+}
+
+
+.formDetailStyle{
+width:80%; height:100%; 
+background-color : white;
+position :absolute; top : -16.5px; right :0px; overflow:hidden;
+}
+
+.z-icon-times-circle.overMouse{
+width:120%; height:120%; color : black;
+}
+.z-icon-times-circle.onMouse{
+width:120%; height:120%; color : blue;
+}
+
+.z-icon-photo.justIcon{
+
+}
+.z-icon-file.justIcon{
+height : 200%;
+}
+
+.z-icon-upload.justIcon{
+font-size : 30px;
+}
+
+.justForIcon{
+background-color : transparent!important;
+box-shadow : none!important;
+border-color : none!important;
+}
+
+.z-icon-times-circle.justIcon{
+	font-size : 40px;
+}
+
+.z-icon-times-circle.justIcon:hover{
+    color : black;
+	font-size : 40px;
+}
+
+.addition{
+border-color : orange!important;
+}
+
+.buttonFormInput{
+border-radius: 100%;
+width : 80%;
+height : 80%;
+border-color : #00840B;
+background-color : #00FF0B;
+position : relative;
+top : -3px;
+}
+
+.z-icon-crosshairs.centerFormInput{
+position : relative;
+left : -4px;
+top : 0px;
+}
+
+.labelFormInput{
+font:  12px Georgia, serif;
+color : black;
+}
+
+.labelFormInputInvalid{
+font:  12px Georgia, serif;
+color : red!important;
+}
+
+.buttonFormInputNew{
+font-size : 12px;
+width : 165px;
+}
+
+tr.odd td.gc,tr.odd,tr.z-listbox-odd,tr.z-grid-odd td.z-row-inner,tr.z-grid-odd
+	{
+	background-color: #FFFFFF ;
+}
+
+
+.textboxFormInput{
+  border: 0;
+  outline: 0;
+  font-size: 10px;
+  font-familiy : arial;
+  width : 100px;
+  border: 1px solid #82E98C;
+  background-color : transparent;
+}
+
+.textboxFormInputInvalid{
+  border: 0;
+  outline: 0;
+  font-size: 10px;
+  font-familiy : arial;
+  width : 100px;
+  border: 1px solid red!important;
+  color : red!important;
+  background-color : transparent;
+}
+
+.w3SearchButton.backPopUp{
+ height: 35px;
+  left : 25%;
+}
+.popupWindow{
+width : 40%;
+height : 90%;
+ background-color : #73AD21;
+   border-radius: 4% / 4%;
+     text-align: center;
+  text-indent: .1em;
+<!--    -webkit-box-shadow:  5px 6px #ccc;  -->
+<!--   -moz-box-shadow:     5px 6px #ccc;   -->
+<!--   box-shadow:          5px 6px #ccc; -->
+
+.buttonFormSequence{
+  border-radius: 4% / 4%;
+  width : 10px; height : 10px;
+  background-color : #A3D260;
+}
+
+.formButtonSclass {
+    color:  white ; 
+    font-size : 11px;
+    padding: 10px 10px; 
+    cursor: pointer; 
+<!--     float: right; /* Float the buttons side by side */ -->
+    background-color: #000000;
+	font-size : 15px bold;
+	padding: 10px 20px;
+	width: 90px;
+	height : 80px;
+}
+
+
+
+.formSequenceButton{
+     color:  white ; 
+     position : relative; 
+     padding: 10px 20px; width : 160px;
+     background-color: #000000;
+	 font-size : 15px bold; height:80px;
+     padding: 10px 10px; 
+     cursor: pointer; 
+}
+</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		function slide(){
+			$(".box1").hide("slide", { direction: "left" }, 500);
+			$(".box2").show("slide", { direction: "right" }, 500);
+		}
+	</script>
+
+</zk>

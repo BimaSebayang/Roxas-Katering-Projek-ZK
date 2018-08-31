@@ -1,0 +1,16 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+ <script type="text/javascript">
+        function invalid_FormClass(id1,id2,id3, class1,class2,class3) {
+                jq('$' + id1).removeClass(class1);
+                jq('$' + id2).removeClass(class2);
+                jq('$' + id3).removeClass(class3);
+        }
+    
+    function valid_FormClass(id1,id2,id3, class1,class2,class3) {
+                jq('$' + id1).addClass(class1);
+                jq('$' + id2).addClass(class2);
+                jq('$' + id3).addClass(class3);
+    }
+ </script>
+</zk>

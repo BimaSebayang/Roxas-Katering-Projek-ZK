@@ -1,0 +1,127 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<include src="/StyleSheet/MenuUtama/MenuTransaksiStyle.zul"/>
+<include src="/StyleSheet/MessageBox/MessageBoxStyle.zul"/>
+
+<window title="" border="normal" sclass="window-transaksi" 
+apply="org.zkoss.bind.BindComposer" 
+viewModel="@id('vm') @init('vmd.Transaksi.Regristrasi.MasterConfigurasiMenuVmd')">
+ 
+ <caption Label = "MASTER KONFIGURASI MENU" >  
+ </caption>
+<separator height="10px"/>
+<include src="/menuUtama/ListExistingButton/listButton.zul"/>
+<separator height="10px"/>
+ <div  style="top : 20px; position : relative; background-color:black; width : 120px; height : 40px;"> 
+ <label value="Halaman " style="color : white; position :absolute; top : 10px; left : 30px;"/>
+</div>
+  <paging pageSize="10" mold="default" totalSize="@load(vm.totalElements)" activePage="@bind(vm.pageNum)" style="top : -22px; position : relative; left:120px; width : 88%;"
+	        onPaging="@command('slicePaging')"/> 
+<separator height="10px"/>
+<div style="position : relative; top : -3px; left : 0px;">
+	<textbox sclass="text-box-forgotPassword" value="@bind(vm.search)" onOK="@command('searchOrClick')" placeholder="Search..."/>
+	<button iconSclass="z-icon-search-plus" height= "33px" width = "33px" 
+	onClick="@command('searchOrClick')"  sclass="w3SearchButton"/>
+	<button label="Refresh" onClick="@command('refreshList')" 
+	        height= "35px" left="62%" iconSclass="z-icon-refresh" sclass="w3SearchButton" />   
+</div>
+<listbox model="@bind(vm.tableConfigurationMenuDtos)" sclass="listBoxIndex"
+selectedItem="@bind(vm.tableConfigurationMenuDto)" checkmark="true" mold="paging" >
+<listhead style="">
+<listheader  label="NAMA KARYAWAN" sort="auto(namaKaryawan)" onSort="@command('sliceSorter', exec = '(d.namaKaryawan)')" style="text-align: center;font-size : 11px; background-color : #2D3234;" >
+<button iconSclass="z-icon-filter"  onClick="@command('filter', exec = 'NAMA KARYAWAN')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="NAMA MENU" sort="auto(menuName)" onSort="@command('sliceSorter', exec = '(b.menuName)')" style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter"  onClick="@command('filter', exec = 'NAMA MENU')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="NAMA TOMBOL" sort="auto(buttonName)" onSort="@command('sliceSorter', exec = '(c.buttonName)')" style="text-align: center; font-size : 11px; background-color :  #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'NAMA TOMBOL')"
+style ="position:absolute;left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="STATUS" sort="auto(mstCodeTypeName)" onSort="@command('sliceSorter', exec = '(f.mstCodeTypeName)')" style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'STATUS')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important;border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+<listheader label="TANGGAL DIBUAT" sort="auto(createdDate)" onSort="@command('sliceSorter', exec = '(a.createdDate)')" style="text-align: center; font-size : 11px; background-color :   #2D3234;">
+<button iconSclass="z-icon-filter" onClick="@command('filter', exec = 'TANGGAL DIBUAT')"
+style ="position:absolute; left : -5px;top:-3px; background-color:transparent!important; border-color:transparent!important;box-shadow : none!important;"/>
+</listheader>
+</listhead>
+<template name="model">
+<listitem >
+<listcell label="@bind(each.namaKaryawan)" style="font-size : 11px; background-color : #DBD7D2;" />
+<listcell label="@bind(each.menuName)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.buttonName)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.mstCodeTypeName)" style="font-size : 11px; background-color : #DBD7D2;"/>
+<listcell label="@bind(each.createdDate ) @converter('Master.Converter.MyDateFormatConverter', format='dd/MM/yyyy')" style="font-size : 11px; background-color : #DBD7D2;"/>
+</listitem>
+</template>
+</listbox>
+
+
+
+<!-- bagian filter start -->
+<window id="modalDialog" width="350px" height="350px" 
+    position="center,center" visible="@bind(vm.onFilter)"
+    border="normal" sclass="filteringWindow" mode="modal" 
+    action="show: slideDown; hide: slideUp" shadow="false">
+    <caption id="filter" label="@bind(vm.filterTitle)" />
+    <div>
+    <button label="Ok" onClick="@command('okFilter', fold = filter.label)" sclass="filterOkButton"/>
+    <separator height="10px"/>
+    <div width="90%" height="90%" style ="overflow-x:auto; overflow-y:auto;">
+    <listbox model="@bind(vm.filterTableConfigurationMenuDto.namaKaryawans)" sizedByContent="true"
+     checkmark="true" multiple="true" style=" border : none;" 
+     selectedItems="@bind(vm.tempFilterTableConfigurationMenuDto.namaKaryawans)">
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableConfigurationMenuDto.namaMenus)" sizedByContent="true"
+     checkmark="true" multiple="true" style="border : none;" 
+     selectedItems="@bind(vm.tempFilterTableConfigurationMenuDto.namaMenus)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableConfigurationMenuDto.namaTombols)" sizedByContent="true"
+     checkmark="true" multiple="true" style=" border : none;" 
+     selectedItems="@bind(vm.tempFilterTableConfigurationMenuDto.namaTombols)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+     <listbox model="@bind(vm.filterTableConfigurationMenuDto.statuss)" sizedByContent="true"
+     checkmark="true" multiple="true" style="border : none;" 
+     selectedItems="@bind(vm.tempFilterTableConfigurationMenuDto.statuss)" >
+    <template name="model">
+    <listitem>
+    <listcell  style="font-size : 12px; background-color : #DBD7D2;"/>
+    <listcell label="@bind(each)" style="text-align : left; left : -20px; font-size : 12px; background-color : #DBD7D2;" />
+    </listitem>
+     </template>
+    </listbox>
+    </div>
+    </div>
+</window>
+<!-- bagian filter end -->
+
+<!-- Include Ini Harus Masuk Dalam Setiap Transaksi -->
+<include src="/Transaksi/Regristrasi/SmartFormUi/MasterConfigurasiMenuForm/MasterSmartFormUiStyle.zul"/> 
+<include src="/Transaksi/Regristrasi/SmartFormUi/MasterConfigurasiMenuForm/MasterSmartRefactorUiStyle.zul"/>
+
+
+
+</window>
+</zk>

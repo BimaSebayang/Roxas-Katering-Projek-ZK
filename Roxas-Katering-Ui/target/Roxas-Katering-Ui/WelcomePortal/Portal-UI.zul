@@ -1,0 +1,261 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style>
+.button {
+    background-color: #4CAF50;
+	display: inline-block;
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 10px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    position: relative;
+    left: 124px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+	}
+	
+.button-forgotPassword {
+    background-color: #4CAF50;
+	display: inline-block;
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 10px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    position: relative;
+    left: 0px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+	}	
+	
+.vbox{
+    border: 3px solid #73AD21;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}	
+
+.window{
+text-align:center; 
+background-color : #73AD21;
+ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}	
+
+.loginTab{
+    height : 300px;
+    position: relative;
+}
+
+.text-font{
+font-weight: bold;
+font-family: Georgia; 
+color: #337B33;
+}
+
+.container {
+    top : 50px;
+    left : 300px;
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+.text-box-forgotPassword{
+border-color : #32cf33;
+display: inline-block;
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    position: relative;
+    left: -30px;
+    transition: all 0.5s;
+    cursor: text;
+    margin: 5px;
+}
+
+.text-box{
+border-color : #32cf33;
+display: inline-block;
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    position: relative;
+    left: 98px;
+    transition: all 0.5s;
+    cursor: text;
+    margin: 5px;
+}
+
+.nav_toolbar .z-toolbarbutton-content i { font-size: 20px;}
+        .nav_tabs .z-tabpanel { padding: 0; border-bottom: 0 none;}
+        .nav_tabs .z-tabpanels .z-toolbarbutton-content { padding: 4px;}
+        .nav_category { cursor:pointer; }
+        .nav_text { color: #696569; font-size : 24px; font-weight: bold;}
+        
+        .tabIcon{
+         text-align: center;
+    text-transform: uppercase;
+    color: #4CAF50;
+        }
+</style>
+
+
+<window title="" sclass="window" border="normal"
+	apply="org.zkoss.bind.BindComposer" height="100%" width="100%"
+	viewModel="@id('vm') @init('vmd.PortalMenu.PortalMenuLogin')">
+	
+	<div sclass = "container">
+	<tabbox id="tb" width="50%" height="60%" mold="accordion" >
+	<tabs>
+	<tab label = "Log In"  sclass="tabIcon" style="background : #E68B3B;"></tab>
+	<tab label = "Forgot Password "  sclass="tabIcon" style="background : #9B33AF;"></tab>
+	<tab label = "Create Account " sclass="tabIcon" style="background : #E61F3B;"></tab>
+	</tabs>
+	<tabpanels>
+	  <tabpanel>  
+	  <div sclass="loginTab">
+	   <vbox width="30px" height="30px"  align="center" >
+	   <separator height="50px"/> 
+	   <hbox>
+	   <separator width="50px"/> 
+       <textbox constraint="no empty : Mohon isi nama user" 
+          value="@bind(vm.inputUserId)" 
+          sclass = "text-box" placeholder="Nama User" width="300px"/>
+       </hbox>
+       <separator width="50px"/> 
+       <hbox >
+       <separator width="57px"/> 
+       <textbox value="@save(vm.inputPassword)" type="password" sclass = "text-box"
+        width="300px" placeholder="Password"
+       />
+       </hbox>
+       <separator width="50px"/> 
+       <button sclass="button" width="300px" 
+       onClick="@command('login')" label="@load(vm.tableButtonDto.buttonName)" iconSclass="z-icon-home"
+         />
+       </vbox>
+       </div>  
+	  </tabpanel>
+	 <tabpanel>
+	 
+	 <window id="firstEffect"  width="100%" height="100%">
+	   <vbox width="100%" height="100%"  align="center" >
+	   <hbox>
+	   <separator width="57px"/> 
+       <textbox
+          value="@load(vm.inputUserId)@save(vm.inputUserId, before='login')" 
+          sclass = "text-box-forgotPassword" placeholder="Nama Lengkap User" width="300px"/>
+       </hbox>
+       <separator width="50px"/> 
+	   <hbox>
+	   <separator width="57px"/> 
+       <textbox
+          value="@load(vm.inputUserId)@save(vm.inputUserId, before='login')" 
+          sclass = "text-box-forgotPassword" placeholder="User Id" width="300px"/>
+       </hbox>
+       <separator width="50px"/> 
+       <hbox >
+       <separator width="57px"/> 
+       <textbox value="@save(vm.inputPassword)" type="password" 
+       sclass = "text-box-forgotPassword" width="300px" 
+       placeholder="Input Nomor Token" />
+       </hbox>
+       <separator width="50px"/> 
+       <groupbox closable="false" xmlns:w='client' style="border-style : none;">
+       <button sclass="button-forgotPassword" width="300px"  label="Request Changed" 
+       iconSclass="z-icon-pencil"  w:onClick="jq('$firstEffect').show().slideUp(300)"/>
+       </groupbox>
+       </vbox>
+     </window>
+
+     <window id="secondEffect"  width="100%" height="100%">
+	   <vbox width="100%" height="100%"  align="center" >
+	   <hbox>
+	   <separator width="57px"/> 
+       <textbox 
+          value="@bind(vm.inputUserId)" 
+          sclass = "text-box-forgotPassword" placeholder="Old Password" 
+          type="password"
+          width="300px"/>
+       </hbox>
+       <separator width="50px"/> 
+       <hbox >
+       <separator width="57px"/> 
+       <textbox value="@save(vm.inputPassword)" type="password" 
+       sclass = "text-box-forgotPassword" width="300px" placeholder="New Password"
+       />
+       </hbox>
+       <separator width="50px"/> 
+       <groupbox closable="false" xmlns:w='client' style="border-style : none;">
+       <button sclass="button-forgotPassword" width="300px" label="Change Password" 
+       iconSclass="z-icon-pencil"  w:onClick="jq('$secondEffect').show().slideUp(300)"/>
+       </groupbox>
+       </vbox>
+     </window>
+     
+	 </tabpanel>
+	 <tabpanel>
+	 Sign Up
+	 </tabpanel>
+	 </tabpanels>
+	</tabbox>
+</div>
+	
+</window>
+</zk>

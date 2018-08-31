@@ -1,0 +1,100 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+
+<include src="/StyleSheet/MenuUtama/MenuUtamaStyle.zul"/>
+
+<window title=""  border="normal" sclass="window"
+apply="org.zkoss.bind.BindComposer" height="99%" width="100%"
+viewModel="@id('vm') @init('Source.MainSource.TransferUserData')">
+
+<div sclass = "navigator-header">
+<div sclass = "numberNotes">
+<hbox>
+<label value="@bind(vm.countMessage)" style="color : red; position : fixed; left : 65px;"/>
+<label value="0" style="color : red; position : fixed; left : 150px;"/>
+</hbox>
+</div>
+	<button sclass = "z-button-exclamation" iconSclass = "z-icon-upload" orient="vertical">Log Out </button>
+    <button sclass= "z-button-exclamation" iconSclass = "z-icon-bell" orient="vertical" onClick = "@command('notifGo')">Notifikasi</button>
+    <button sclass = "z-button-exclamation" iconSclass = "z-icon-envelope" orient="vertical" onClick = "@command('sendGo')">Pesan </button>
+</div>
+
+
+
+<div sclass = "navigator-menu">
+	<tabbox id="tb" width="100%" height="100%" mold="accordion" sclass="tabbox-menu" tabscroll="true">
+	<tabs>
+	<tab label = "Master" iconSclass = "z-icon-save" sclass="navigator-menu-tab"/>
+	<tab label = "Regristasi" iconSclass = "z-icon-pencil" sclass="navigator-menu-tab"/>
+	<tab label = "Akunting" iconSclass = "z-icon-book" sclass="navigator-menu-tab"/>
+	<tab label = "Order" iconSclass = "z-icon-truck" sclass="navigator-menu-tab"/>
+	<tab label = "Image Map" iconSclass = "z-icon-compass" sclass="navigator-menu-tab"/>
+	<tab label = "Report" iconSclass = "z-icon-inbox" sclass="navigator-menu-tab"/>
+	<tab label = "Calendar/Schedule" iconSclass = "z-icon-calendar-o" sclass="navigator-menu-tab"/>
+	</tabs>
+	<tabpanels>
+	
+	
+	 <tabpanel>
+	     <vlayout spacing="5px" >
+	    <button label="${each.tableMenuDto.menuName}" forEach="${vm.tableConfigurationMenusForMaster}" 
+         id="${each.tableMenuDto.menuCode}" onClick="@command('buttonMenu', menu = self.id)" 
+         iconSclass = "@bind(vm.zIconSclass	)" sclass="tab-panel-sub-menus noshadow" />
+         </vlayout>
+	 </tabpanel>
+	 
+	 <tabpanel>
+	 <vlayout spacing="5px">
+	    <button label="${each.tableMenuDto.menuName}" forEach="${vm.tableConfigurationMenusForRegristrasi}" 
+         id="${each.tableMenuDto.menuCode}" onClick="@command('buttonMenu', menu = self.id)" 
+         iconSclass = "@bind(vm.zIconSclass	)" sclass="tab-panel-sub-menus noshadow"/>
+         </vlayout>
+	 </tabpanel>
+	 <tabpanel>
+	 <vlayout spacing="5px">
+	    <button label="${each.tableMenuDto.menuName}" forEach="${vm.tableConfigurationMenusForAkunting}" 
+         id="${each.tableMenuDto.menuCode}" onClick="@command('buttonMenu', menu = self.id)" 
+         iconSclass = "@bind(vm.zIconSclass	)" sclass="tab-panel-sub-menus noshadow"/>
+         </vlayout>
+	 </tabpanel>
+	 <tabpanel>
+	 <vlayout spacing="5px">
+	    <button label="${each.tableMenuDto.menuName}" forEach="${vm.tableConfigurationMenusForOrder}" 
+         id="${each.tableMenuDto.menuCode}" onClick="@command('buttonMenu', menu = self.id)" 
+         iconSclass = "@bind(vm.zIconSclass	)" sclass="tab-panel-sub-menus noshadow"/>
+         </vlayout>
+	 </tabpanel>
+	  <tabpanel>
+	 <vlayout spacing="5px">
+	    <button label="${each.tableMenuDto.menuName}" forEach="${vm.tableConfigurationMenuForImageMap}" 
+         id="${each.tableMenuDto.menuCode}" onClick="@command('buttonMenu', menu = self.id)" 
+         iconSclass = "@bind(vm.zIconSclass	)" sclass="tab-panel-sub-menus noshadow"/>
+         </vlayout>
+	 </tabpanel>
+	 <tabpanel>
+	 </tabpanel>
+	  <tabpanel>
+	    <calendar ></calendar>
+	 </tabpanel>
+	 
+	 </tabpanels>
+	</tabbox>
+</div>
+
+<div sclass="navigator-menu-transaksi" visible="@load(vm.onTransaksi)">
+<include menuDto ="@load(vm.tableConfigurationMenuDto.tableMenuDto)"
+         buttonDto = "@load(vm.tableButtonDtos)" 
+         src="@load(vm.tableConfigurationMenuDto.tableMenuDto.menuUrl)" />     
+</div>
+
+<div sclass="navigator-menu-transaksi" visible="@load(vm.onSend)">
+<include src="/Message/AllTrxApproval.zul" visible="@load(vm.onSend)" />
+</div>
+
+<div style = "position : fixed; top:6px; right :10px;" width="500px" height="500px">
+<include src="/ChatCoredUi/Ui/WelcomeChatUi.zul"/>
+</div>
+
+</window>
+</zk>

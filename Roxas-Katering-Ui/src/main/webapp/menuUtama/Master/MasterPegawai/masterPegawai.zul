@@ -1,0 +1,179 @@
+<?page title="Master Pegawai" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="@load(vm.tableMenuDto.menuName)" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('vmd.master.masterPegawai.MasterPegawaiVmd')" height="100%" width="100%">
+		<hbox>
+			<!-- buat Menampilkan Button Yang Ada -->
+			<include src="ListExistingButton/listButton.zul" />
+			<!-- buat Menampilkan Button Yang Ada -->
+			<combobox model="@load(vm.globalVariablesForStatus)"
+				onSelect="@command('selectedCombo')"
+				selectedItem="@bind(vm.globalVariableForStatus)">
+				<template name="model">
+					<comboitem label="@load(each.mstCodeTypeName)"
+						value="@bind(each.mstCodeType)" />
+				</template>
+			</combobox>
+		</hbox>
+		
+	   <listbox model="@bind(vm.dataKaryawanDtos)"
+			selectedItem="@bind(vm.selectedDataKaryawanDto)" mold="paging"
+			pagingPosition="bottom" pageSize="10" sizedByContent="true">
+			<listhead>
+				<listheader label="ID PEGAWAI " />
+				<listheader label="NAMA PEGAWAI " />
+				<listheader label="JENIS KELAMIN PEGAWAI" />
+				<listheader label="JOB DESK PEGAWAI " />
+				<listheader label="ROLE PEGAWAI " />
+				<listheader label="STATUS PEGAWAI " />
+				<listheader label="TANGGAL DIBUAT " />
+				<listheader label="NAMA PEMBUAT " />
+				<listheader label="TANGGAL DIUPDATE " />
+				<listheader label="NAMA PENGUPDATE " />
+				
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@bind(each.id)" />
+					<listcell label="@bind(each.namaKaryawan)" />
+					<listcell label="@bind(each.jenisKelaminDescription)" />
+					<listcell label="@bind(each.jobDesk)" />
+					<listcell label="@bind(each.roleDescription)" />
+					<listcell label="@bind(each.statusName)" />
+					<listcell label="@bind(each.createdDate) @converter('formatedDate', format='dd/MM/yyyy, HH:MM')" />
+				    <listcell label="@bind(each.createdByName)" />
+					<listcell label="@bind(each.updatedDate) @converter('formatedDate', format='dd/MM/yyyy, HH:MM')" />
+					<listcell label="@bind(each.updatedByName)" />
+				</listitem>
+			</template>
+		</listbox>
+		
+		<window title="@load(vm.tableMenuDto.menuName)" width="80%"
+			height="80%" mode="modal" visible="@load(vm.activeDetail)">
+			<hlayout style="float:right">
+				<button label="KEMBALI" onClick="@command('kembali')" />
+				<button label="SIMPAN" onClick="@command('simpan')" />
+			</hlayout>
+			<div>
+			
+				<grid >
+					<columns>
+						<column width="125px" />
+						<column width="500px" />
+					</columns>
+					<rows>
+						<row>
+							<label value=" ID PEGAWAI : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.id)"
+									placeholder="GENERATE AUTO" readonly="true" />
+							</hbox>
+						</row>
+						
+						<row>
+							<label value=" NAMA PEGAWAI : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.namaKaryawan)"
+									placeholder="WAJIB DIISI" style="text-transform:uppercase" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" NIK : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.nik)" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" NO KK : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.noKk)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" NO NPWP : " />
+							<hbox>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.noNpwp)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" JOB DESKRIPSI PEGAWAI : " />
+							<hbox>
+							    <textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.jobId)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							    <button label="Tambah" sclass="btn-index" onClick = "@command('popUpJob')"
+							    disabled="@load(vm.onView)"/>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.jobDesk)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+							<label value=" ROLE DESKRIPSI PEGAWAI : " />
+							<hbox>
+							    <textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.roleId)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							    <button label="Tambah" sclass="btn-index" onClick = "@command('popUpRole')"
+							    disabled="@load(vm.onView)"/>
+								<textbox
+									value="@bind(vm.dataKaryawanDtoForTambah.roleDescription)"
+									placeholder="WAJIB DIISI" 
+									readonly="@load(vm.onView)"/>
+							</hbox>
+						</row>
+						<row>
+						    <label value=" JENIS KELAMIN : " />
+						    <hbox>
+						      <radiogroup id="rg1" onCheck="@bind(vm.dataKaryawanDtoForTambah.jenisKelamin)" 
+						       model="@load(vm.globalVariablesForSexStatus)" 
+						       selectedItem="@bind(vm.globalVariableForSexStatus)"> 
+						      <template name="model">
+						      <radio label="@load(each.mstCodeTypeName)" value="@bind(each.mstCodeType)"
+						      radiogroup="rg1" disabled="@load(vm.onView)"/>
+						      </template>
+						      </radiogroup>
+						    </hbox>
+						</row>
+						<row>
+						<label value = "PHOTO : "/>
+						<hbox>
+						<button upload="true,maxsize=-1,native" disabled="@load(vm.onView)"
+						onUpload="@command('onPhotoUpload')" label="Pilih Foto"/>
+						<image content="@load(vm.empPhoto) @converter('Master.Converter.ImageToZkImageConverter')"
+						width="70px" height="70px"/>	
+						<image content="@load(vm.myimage)" width="70px" height="70px"></image>
+						</hbox>
+						</row>
+						<row>
+						<label value = "FILE PEGAWAI : "/>
+						<hbox>
+						<button upload="true,maxsize=-1,native" onUpload="@command('onFileUpload')" label="Pilih File"
+						disabled="@load(vm.onView)"/>
+						<button onClick="@command('onDownload')" label="@load(vm.titleFile)"/>
+						</hbox>
+						</row>
+					</rows>
+				</grid>
+			</div>
+		</window>
+		
+		
+		
+	</window>
+</zk>

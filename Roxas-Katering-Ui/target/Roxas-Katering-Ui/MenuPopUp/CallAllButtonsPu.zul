@@ -1,0 +1,40 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window title="" border="normal" sclass="popupWindow" 
+apply="org.zkoss.bind.BindComposer"  id="lov" mode="popup" 
+viewModel="@id('vm') @init('vmd.MenuPopUp.CallAllButtonsPuVmd')">
+
+<caption label="POP UP : TOMBOL" style="text-align:center; font-weight: bold; top : -10px;"/>
+
+<div style="position : relative; top : 10px; left : -63px;">
+	<textbox sclass="text-box-forgotPassword" value="@bind(vm.search)" onOK="@command('searchOrClick')" placeholder="Search..."/>
+	<button iconSclass="z-icon-search-plus" height= "33px" width = "33px" 
+	onClick="@command('searchOrClick')" sclass="w3SearchButton"/>
+	<button label="Kembali" onClick="@command('kembali', destroy = lov)" 
+	   iconSclass="z-icon-back" sclass="w3SearchButton backPopUp" />
+</div>
+
+<separator height="30px"/>
+<div width="100%" height = "430px" style="overflow:auto;">
+<listbox model="@bind(vm.tableButtonDtos)" sclass="listBoxIndex"
+selectedItem="@bind(vm.tableButtonDto)" 
+mold="paging" pagingPosition="top" pageSize="7">
+<listhead style="">
+<listheader label="KODE TOMBOL" sort="auto(buttonCode)" style="font-size : 12px; background-color : #2D3234;"/>
+<listheader label="NAMA TOMBOL" sort="auto(buttonName)" style="font-size : 12px; background-color :   #2D3234;"/>
+<listheader label="KETERANGAN" sort="auto(notes)" style="font-size : 12px; background-color :  #2D3234;"/>
+</listhead>
+<template name="model">
+<listitem>
+<listcell label="@bind(each.buttonCode)" style="font-size : 12px; background-color : #DBD7D2;" onDoubleClick="@command('pilih', destroy = lov)"/>
+<listcell label="@bind(each.buttonName)" style="font-size : 12px; background-color : #DBD7D2;" onDoubleClick="@command('pilih', destroy = lov)"/>
+<listcell label="@bind(each.notes)" style="font-size : 12px; background-color : #DBD7D2;" onDoubleClick="@command('pilih', destroy = lov)"/>
+</listitem>
+</template>
+</listbox>
+</div>
+</window>
+
+
+</zk>

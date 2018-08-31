@@ -1,0 +1,130 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" border="none" width="1000px" height="500px"
+    position="center,center" visible="@bind(vm.groupPageInfoForm)"  mode="highlighted" 
+    style = "background-color : transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+      
+<!--    viewModel="@id('vm') @init('vmd.Transaksi.MasterConfigurasiMenuVmd')" -->
+    
+    <div style = "width:130%; height:120%; background-color : black; position :relative; top : -16px; left : -16px; ">
+    
+    <image content="@load(vm.rocketLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="150px" height="150px" 
+		   style = "position : absolute; border-radius: 50%;
+		            top : 20px;
+		            left : 115px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>		
+    <image content="@load(vm.sateliteLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="150px" height="150px" 
+           style = "position : absolute;  border-radius: 50%;
+           top : 20px;
+           right : 350px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>	
+    
+    <div style="position :absolute; bottom : 140px; left : 90px;">
+    <vbox>
+    <button label="SAVE" onClick="@command('saveForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah)"/>
+    <button label="BACK" onClick="@command('backForm')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("formDetailStyle");
+    </attribute>
+    </button>
+    <button label="HELP" onClick="@command('helpForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah)">
+    <attribute name="onClick">
+    formDetail.setSclass("helpFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    </div>
+    
+    <div style = "position :absolute; bottom : 140px; right : 90px; ">
+    <vbox>
+    <button label="SHOW" onClick="@command('showProcedure')"  sclass="buttonFormInputNew"/>
+    <button label="RETURN" onClick="@command('returnProcedure')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("returnFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    
+    
+<!--   Start Form Detail  -->
+
+<!-- Header Start -->
+    <div id="formDetail" sclass="formDetailStyle">
+    <div style="display : inline-block; position : relative; left : 30px;" visible="@bind(vm.saatReturn)"> 
+    <div style = "position : relative; top : 12px; left : -30px ; width : 150%; height : 60px; 
+    background-color : #94C40F; border-bottom : 2px solid; border-bottom-color : green;">
+    <hbox>
+    <button iconSclass="z-icon-file" sclass="justForIcon"/>
+    <label value="Smart Form Ui" style = "font : 26px Comic Sans MS, cursive, sans-serif; color : white;"/>
+    </hbox>
+    </div>
+    <separator height="40px"/>
+<!-- Header End -->
+
+<!-- Body Start -->
+    <hbox action="show: slideIn; hide: slideOut" visible="@bind(vm.onFormFilled)">
+    <separator width="10px"/>
+    <vbox>
+    <vbox>
+    <textbox constraint="no empty, before_start : Bagian Ini Tidak Boleh Kosong"
+       placeholder="User Id" readonly="true" value="@load(vm.tableConfigurationMenuDto.userId) 
+       @save(vm.tableConfigurationMenuDto.userId, before={'saveForm','callButtonCode'})" 
+       sclass="textboxFormInput"/> 
+    <div style = "position : relative; background-color : #94C40F; height : 3px; width : 473%;"/>
+    <label value="Informasi User" sclass="labelFormInput"/>
+    </vbox>
+    <separator height="70px"/>
+    <vbox>
+    <textbox constraint="no empty, before_start : Bagian Ini Tidak Boleh Kosong" placeholder="Kode Menu" readonly="true"  
+    value="@load(vm.tableConfigurationMenuDto.menuCode) 
+    @save(vm.tableConfigurationMenuDto.menuCode, before={'saveForm','callButtonCode'})" sclass="textboxFormInput"/>
+    <div style = "position : relative; background-color : #94C40F; height : 3px; width : 473%;"/>
+    <label value="Informasi Menu" sclass="labelFormInput"/>
+    </vbox> 
+    <separator height="70px"/>
+    <vbox>
+    <textbox constraint="no empty, before_start : Bagian Ini Tidak Boleh Kosong" placeholder="Kode Tombol" readonly="true" 
+    value="@load(vm.tableConfigurationMenuDto.tableButtonDto.buttonCode) 
+    @save(vm.tableConfigurationMenuDto.tableButtonDto.buttonCode, before={'saveForm'})"
+    sclass="textboxFormInput"/> 
+    <div style = "position : relative; background-color : #94C40F; height : 3px; width : 473%;"/>
+    <label value="Informasi Tombol" sclass="labelFormInput"/>
+    </vbox>
+    </vbox>
+    <separator width="5px"/>
+     <vbox>
+    <button iconSclass="z-icon-crosshairs centerFormInput" onClick="@command('callUserId')"  disabled="@bind(vm.saatLihat)" sclass="buttonFormInput"/>
+    <separator height="95px"/>
+    <button iconSclass="z-icon-crosshairs centerFormInput" onClick="@command('callMenuCode')" disabled="@bind(vm.saatLihat)" sclass="buttonFormInput"/>
+    <separator height="95px"/>
+    <button iconSclass="z-icon-crosshairs centerFormInput" onClick="@command('callButtonCode')" disabled="@bind(vm.saatLihat)" sclass="buttonFormInput"/>
+    </vbox> 	
+    
+    <vbox>
+    <hbox>
+    <textbox placeholder="Id Pegawai" readonly="true"  value="@bind(vm.tableConfigurationMenuDto.pegawaiId)" sclass="textboxFormInput"/>
+     <textbox placeholder="Nama Karyawan" width="200px" readonly="true" value="@bind(vm.tableConfigurationMenuDto.namaKaryawan)" sclass="textboxFormInput"/> 
+     </hbox>
+      <separator height="100px"/> 
+     <textbox placeholder="Nama Menu" readonly="true" width = "300px"  value="@bind(vm.tableConfigurationMenuDto.menuName)" sclass="textboxFormInput"/>
+      <separator height="100px"/>
+     <textbox placeholder="Nama Tombol" readonly="true" width = "300px"  value="@bind(vm.tableConfigurationMenuDto.tableButtonDto.buttonName)" sclass="textboxFormInput"/>
+    </vbox>
+    </hbox>  
+<!-- Body Start -->
+
+   
+    </div>
+    </div>
+<!--   End Form Detail  -->      
+    </window>
+</zk>

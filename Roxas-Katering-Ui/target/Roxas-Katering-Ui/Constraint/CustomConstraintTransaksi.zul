@@ -1,0 +1,20 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<zscript>
+<![CDATA[
+        class MyConst implements Constraint, CustomConstraint {
+            //Constraint//
+            public void validate(Component comp, Object value) {
+                if (value == null)
+                	Messagebox.show("Data Tidak Boleh Kosong");
+                    throw new WrongValueException(comp, "At least 100 must be specified");
+            }
+            //CustomConstraint//
+            public void showCustomError(Component comp, WrongValueException ex) {
+                       
+            }
+        }
+        Constraint ctt = new MyConst();
+    ]]>
+</zscript>
+</zk>

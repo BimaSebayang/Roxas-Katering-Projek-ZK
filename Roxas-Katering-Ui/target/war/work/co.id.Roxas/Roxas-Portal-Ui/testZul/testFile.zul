@@ -1,0 +1,11 @@
+<?page title="buat test doang" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="buat test doang" border="normal"
+apply="org.zkoss.bind.BindComposer" 
+viewModel="@id('vm') @init('main.testZulo')">
+    
+    <button label="Index" onClick="@command('showIndex',  index='cobaIndex')"/>
+    <button label="Delete" onClick="@command('showIndex', index='cobaItem')"/>
+  
+</window>
+</zk>

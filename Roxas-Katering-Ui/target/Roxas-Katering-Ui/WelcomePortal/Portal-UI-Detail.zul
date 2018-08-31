@@ -1,0 +1,652 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:x="xhtml" xmlns:w="client" xmlns:ca="client/attribute">
+
+	<style>
+		.button { background-color: #4CAF50; display: inline-block;
+		*display: inline; vertical-align: baseline; margin: 0 2px;
+		outline: none; cursor: pointer; text-align: center;
+		text-decoration: none; font: 10px/100% Arial, Helvetica,
+		sans-serif; padding: .5em 2em .55em; text-shadow: 0 1px 1px
+		rgba(0,0,0,.3); -webkit-border-radius: .5em; -moz-border-radius:
+		.5em; border-radius: .5em; -webkit-box-shadow: 0 1px 2px
+		rgba(0,0,0,.2); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		box-shadow: 0 1px 2px rgba(0,0,0,.2); position: relative; left:
+		124px; transition: all 0.5s; cursor: pointer; margin: 5px; }
+
+		.vbox{ position: relative; left: 528px; top : 70px; border: 3px
+		solid #73AD21; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px
+		20px 0 rgba(0,0,0,0.19); }
+
+		.window{ text-align:center; background-color : #73AD21;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0
+		rgba(0,0,0,0.19); }
+
+		.text-font{ font-weight: bold; font-family: Georgia; color:
+		#337B33; }
+
+
+		.text-box{ border-color : #32cf33 }
+
+		.gallery { margin: 30px 80px; }
+
+		
+		.gallery {
+    margin: 30px 80px;
+         }  
+ 
+.imageDiv {
+    display: inline-block;
+    position: relative;
+    top : -70px;
+    left : -98px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    border: 3px solid #3E8AE1;  
+}   
+
+.classOnMouseOver{
+    display: inline-block;
+    position: relative;
+    top : -70px;
+    left : -98px;
+    width: 300px; height: 220px; margin: 100px 100px 0 0;
+    border: 3px solid #3E8AE1;  
+}
+
+.classOnMouseOut{
+    display: inline-block;
+    position: relative;
+    top : -70px;
+    left : -98px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    border: 3px solid #3E8AE1;   
+}
+
+.classOnClick{
+    display: inline-block;
+    position: relative;
+     width: 200px; 
+     height: 175px; 
+     margin: -98px 100px 0 0;
+    border: 3px solid #DDDDDD; 
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 300ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 300ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 300ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+  -o-transition: rotate(3600deg);
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.classOnClickLeftButton {
+    display: inline-block;
+    position: relative;
+    top : -100px;
+    left : 400px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation: slideL 0.5s forwards;
+    animation: slideL 0.5s forwards;
+}
+
+@-webkit-keyframes slideL {
+    100% { left: 0px; }
+}
+
+@keyframes slideL {
+    100% { left: 0px; }
+}
+
+.classOnClickLeftButtonClicked {
+    display: inline-block;
+    position: relative;
+     top : -100px;
+    left : 400px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+    -webkit-animation: slideLClicked 0.5s forwards;
+    animation: slideLClicked 0.5s forwards;
+}
+
+@-webkit-keyframes slideLClicked {
+    100% { left: 0px; }
+}
+
+@keyframes slideLClicked {
+    100% { left: 0px; }
+}
+
+.classOnClickRightButton {
+    display: inline-block;
+    position: relative;
+    top : -100px;
+    left : -400px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+    -webkit-animation: slideR 0.5s forwards;
+    animation: slideR 0.5s forwards;
+}
+
+.z-icon-search-plus{
+    width: 2px;
+    height: 2px;
+    position: relative;
+    left: -8px;
+    top : -3px;
+}
+
+@-webkit-keyframes slideR {
+    100% { left: 0px; }
+}
+
+@keyframes slideR {
+    100% { left: 0px; }
+}
+
+.classOnClickRightButtonClicked {
+     display: inline-block;
+    position: relative;
+     top : -100px;
+    left : -400px;
+    width: 300px; height: 200px; margin: 100px 100px 0 0;
+    -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+    -webkit-animation: slideRClicked 0.5s forwards;
+    animation: slideRClicked 0.5s forwards;
+}
+
+@-webkit-keyframes slideRClicked {
+    100% { left: 0px; }
+}
+
+@keyframes slideRClicked {
+    100% { left: 0px; }
+}
+
+<!-- .w3-display-left{position:absolute;top:50%;left:0%; -->
+<!-- transform:translate(0%,-50%); -->
+<!-- -ms-transform:translate(-0%,-50%)} -->
+<!-- .w3-black,.w3-hover-black:hover{color:#fff!important;background-color:#000!important} -->
+.w3right-button
+{border:none;display:inline-block;padding:8px 16px;
+vertical-align:middle;overflow:hidden;text-decoration:none;
+color:inherit;background-color:inherit;text-align:center;
+cursor:pointer; color:#fff!important;background-color:#000!important;
+white-space:nowrap;
+position:relative;top:50%;left:80px; transform:translate(0%,-50%);}
+
+.w3SearchButton{
+text-align:center;
+cursor:pointer; color:#fff!important;background-color:#000!important;
+position:relative; }
+
+.w3left-button
+{border:none;display:inline-block;padding:8px 16px;
+vertical-align:middle;overflow:hidden;text-decoration:none;
+color:inherit;background-color:inherit;text-align:center;
+cursor:pointer; color:#fff!important;background-color:#000!important;
+white-space:nowrap;
+position:relative;top:50%;left:40px; transform:translate(0%,-50%);}
+
+   .height-transition {
+        -webkit-transition: max-height 0.5s ease-in-out;
+        -moz-transition: max-height 0.5s ease-in-out;
+        -o-transition: max-height 0.5s ease-in-out;
+        transition: max-height 0.5s ease-in-out;
+        overflow-y: hidden;            
+    }
+    .height-transition-hidden {            
+        max-height: 0;            
+    }
+
+    .divButton{
+      position: relative;
+      bottom : -180px;
+      left : -30px;
+      width : 10%; 
+    }
+    
+    .hboxInt{
+     position: relative;
+     left : 60px;
+    }
+    
+    .intboxInt{
+    border-color : #32cf33;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	text-align: center;
+	width:40px;
+    }
+    
+    .windowOne{
+    position : absolute;
+    top : 80px;
+    left : 130px;
+     text-align:center;
+        background : #0AFF8A;
+		font-size: 9px;
+		border-width:2px;  
+		border-color: #73AD21;
+		border-style: solid;}
+	
+	.hboxSearch{
+	position : relative;
+	left : -20px;
+	top : -10px;
+	height : 40px;
+	background : #0AFF8A;
+	width :300px;
+	}
+	
+	.text-box-forgotPassword{
+border-color : #32cf33;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+}
+
+    .windowTwo{
+    position : relative;
+    top : 50px;
+    left : 460px;
+     text-align:center;
+        background : #0AFF8A;
+		font-size: 9px;
+		border-width:2px;  
+		border-color: #73AD21;
+		border-style: solid;}
+		
+		.windowThree{
+    position : absolute;
+    top : 383px;
+    left : 740px;
+     text-align:center;
+        background : #0AFF8A;
+		font-size: 9px;
+		border-width:2px;  
+		border-color: #73AD21;
+		border-style: solid;}
+	
+	.clock {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #17D4FE;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+	}
+	
+
+.Profile-Picture {
+  position : relative;
+  display: inline-block;
+  top : 8px;
+  left : 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border-width:2px;  
+  border-color: #73AD21;
+  border-style: solid;
+}
+
+.valueUserId{
+font-family : courier new;
+}
+
+.valuePegawaiName{
+font-family : Lucida Console;
+font-size: 20px;
+font-weight : bold;
+text-align : center;	
+}
+
+.valuePegawaiId{
+font-family : courier new;
+}
+
+.hboxTextInfo{
+  position : absolute;
+  display: inline-block;
+  top : 140px;
+}
+
+.buttonInfo{
+ width: 2px;
+    height: 2px;
+}
+
+.positionSclass{
+    width: 10px;
+    height: 10px;
+    position: relative;
+    left: -5px;
+    top : -1px;
+}
+
+.iconUser{background-color: #4CAF50;}
+.iconEdit{background-color: #F4B014;}
+.iconFile{background-color: #F43F14;}
+
+.windowDiv{
+background-color: #CFD3D5; 
+width: 130%; 
+height : 130%; 
+text-algin : center; 
+position : relative; 
+left : -20px; 
+top:-16px;
+}
+
+
+.buttonLogOut{
+position : absolute;
+right : 20px;
+top : 150px;
+}
+
+.powerOffButton{
+
+   background-color : #CCB373;
+    display: inline-block;
+    top : 100px;
+    right : 20px;
+    position: fixed;
+    width : 100px;
+    transition : 1s;
+    height : 80px;
+}
+
+
+.powerOffButtonOnMouse{
+    display: inline-block;
+    position: fixed;
+    top : 100px;
+    right : 20px;
+     transition : 1s;
+    width : 200px;
+    height : 80px;
+}
+
+.settingButton{
+
+   background-color : #FFD300;
+    display: inline-block;
+    top : 200px;
+    right : 20px;
+    position: fixed;
+    width : 100px;
+    transition : 1s;
+    height : 80px;
+}
+
+.settingButtonOnMouse{
+    display: inline-block;
+    position: fixed;
+    top : 200px;
+    right : 20px;
+    transition : 1s;
+    width : 200px;
+    height : 80px;
+}
+
+.helpButton{
+   background-color : #FF6672;
+    display: inline-block;
+    top : 300px;
+    right : 20px;
+    position: fixed;
+    width : 100px;
+    transition : 1s;
+    height : 80px;
+}
+
+.helpButtonOnMouse{
+    display: inline-block;
+    top : 300px;
+    right : 20px;
+    position: fixed;
+    width : 200px;
+    transition : 1s;
+    height : 80px;
+}
+
+.myMessagebox{
+ background-color : #73AD21;
+ border-width:3px;  
+ border-color: #73AD21;
+ border-style: solid;
+}
+</style>
+
+
+	<window  sclass="window" border="normal"
+		apply="org.zkoss.bind.BindComposer" height="100%" width="100%"
+		viewModel="@id('vm') @init('vmd.PortalMenu.PortalMenuList')">
+   
+   <div sclass="buttonLogOut">
+   <button iconSclass="z-icon-power-off" label="log out" sclass="powerOffButton" onClick="@command('logOut')">
+        <attribute name="onMouseOver">
+         self.setSclass("powerOffButtonOnMouse");
+		</attribute>
+		<attribute name="onMouseOut">
+		 self.setSclass("powerOffButton");
+		</attribute>   
+   </button>
+   <separator height="50px"/>
+   <button iconSclass="z-icon-wrench" label="setting" sclass="settingButton">
+    <attribute name="onMouseOver">
+         self.setSclass("settingButtonOnMouse");
+		</attribute>
+		<attribute name="onMouseOut">
+		 self.setSclass("settingButton");
+		</attribute>   
+   </button>
+   <separator height="50px"/>
+   <button iconSclass="z-icon-cogs" label="help"  sclass="helpButton">
+    <attribute name="onMouseOver">
+         self.setSclass("helpButtonOnMouse");
+		</attribute>
+		<attribute name="onMouseOut">
+		 self.setSclass("helpButton");
+		</attribute>   
+   </button>
+   </div>
+	
+	
+	<window  height="37%" width="35%" sclass="windowTwo">
+	 <hbox sclass="hboxPosition">
+	 <div sclass="windowDiv">
+	 <image sclass="Profile-Picture" content="@bind(vm.profilePictureUser)  
+	 @converter('Master.Converter.ImageToZkImageConverter')"/>
+	 </div>
+	 <separator width="45px" height="100px"/>
+	 <vbox>
+	 <label value="@bind(vm.tableUserDto.userId)" visible="@bind(vm.tableUserDto ne null)" sclass="valueUserId"/>
+	 <label value="@bind(vm.tableUserDto.pegawaiName)" visible="@bind(vm.tableUserDto ne null)" sclass="valuePegawaiName"/>
+	 <label value="@bind(vm.tableUserDto.pegawaiId)" visible="@bind(vm.tableUserDto ne null)" sclass="valuePegawaiId"/>
+	 <label value="@bind(vm.tableMasterPelangganKateringDto.namaPelanggan)" 
+	  visible="@bind(vm.tableUserDto eq null)"/>
+	 
+	 <hbox sclass="hboxTextInfo">
+	 <button iconSclass = "z-icon-user positionSclass" height= "43px" width = "60px" sclass="iconUser"/>
+	 <button iconSclass = "z-icon-edit positionSclass" height= "43px" width = "60px" sclass="iconEdit"/>
+	 <button iconSclass = "z-icon-file positionSclass" height= "43px" width = "60px" sclass="iconFile"/>
+	 </hbox>
+	 </vbox>
+	 </hbox>
+	</window>
+	
+	<separator height="97.5px"/>
+	
+	<window  height="30%" width="18%" sclass="windowTwo">
+	 <div style="background-color: #DBDBDB; width: 130%; height : 60%; text-algin : center; position : relative; left : -20px; top:-16px;">
+     <hbox>
+     <button iconSclass="z-icon-calendar" style="background-color: BLACK; width:100%; height:110%"/>
+     <vbox>
+     <separator width="10px"/>
+     <hbox>
+     <label value="@bind(vm.dayP)" style="font-family : comic sans ms; font-weight : bold;"/>
+     <label value=","/>
+     </hbox>
+     <hbox>	
+	 <label value="@bind(vm.dateP)" sclass="time" style="font-family : bookman"/>
+     <label value="@bind(vm.monthP)" sclass="time" style="font-family : bookman"/>
+     <label value="@bind(vm.yearP)" sclass="time" style="font-family : bookman"/>
+     </hbox>
+     </vbox>
+     </hbox>
+     </div>
+     <button iconSclass = "z-icon-bookmark positionSclass" label="add event" height= "45px" width = "125%"
+      style="position : relative; left : -17px; bottom : -10px;"/>	
+	</window>
+	<window  height="26.7%" width="15.4%" sclass="windowThree">
+     <div style="background-color: #DBDBDB; width: 200%; height : 70%; text-algin : center; position : relative; left : -20px; top:-16px;">
+     <hbox style="position :relative; left : 30px; top : 10px;">
+     <vbox>
+     <label id="hour" sclass="time" style="font-family: 'Tangerine', serif;
+        font-size: 30px;"/>	
+     <label value="Jam"/>
+     </vbox>
+     <label value=":" style="font-family: 'Tangerine', serif;
+        font-size: 30px;"/>
+     <vbox>
+     <label id="minute" sclass="time" style="font-family: 'Tangerine', serif;
+        font-size: 30px;"/>
+     <label value="Menit"/>
+     </vbox>
+     <label value=":" style="font-family: 'Tangerine', serif;
+        font-size: 30px;"/>
+     <vbox>
+     <label id="second" sclass="time" style="font-family: 'Tangerine', serif;
+        font-size: 30px;"/>
+     <label value="Detik"/>
+     </vbox>
+     </hbox>
+     </div>
+     <button iconSclass = "z-icon-bookmark positionSclass" label="edit event" height= "45px" width = "125%"
+      style="position : relative; left : -17px; bottom : -2px;"/>	
+	 <timer id="timer" delay="1000" repeats="true">
+        <attribute name="onTimer">
+        Date time = new Date();
+        String h = new String(time.getHours()+"");
+        String m = new String(time.getMinutes()+"");
+        String s = new String(time.getSeconds()+"");
+        if(h.length()==1)
+        {
+         hour.setValue("0"+time.getHours());
+        }
+        else{
+        hour.setValue(time.getHours()+"");
+        }
+        if(m.length()==1)
+        {
+        minute.setValue("0"+time.getMinutes());
+        }
+        else{
+        minute.setValue(time.getMinutes()+"");
+        }
+         if(s.length()==1)
+        {
+         second.setValue("0"+time.getSeconds());
+        }
+        else{
+        second.setValue(time.getSeconds()+"");
+        }
+        </attribute>
+    </timer>
+	</window >
+	
+	
+	<window sclass="windowOne" title="" height="76.2%" width="24.3%">	
+	<div >
+	<textbox sclass="text-box-forgotPassword" value="@bind(vm.search)" onOK="@command('searchOrClick')" placeholder="Search..."/>
+	<button iconSclass="z-icon-search-plus" height= "33px" width = "33px" 
+	onClick="@command('searchOrClick')" sclass="w3SearchButton"/>
+	</div>
+	<div width="20%" height="20%" sclass="gallery" id="imgGallery">	
+	<hbox id="hboxGallery" sclass="start">
+	 <image forEach="${vm.tablePortalProjekDetailDtos}" id="${each.countDetail}"  
+	           tooltiptext="@bind(vm.tablePortalProjekDetailDtos.get(self.id).namaPortal)" 
+	           tooltip="@bind(vm.tablePortalProjekDetailDtos.get(self.id).urlPortal)" 
+               content="@bind(vm.tablePortalProjekDetailDtos.get(self.id).urlGambarByte) 
+               @converter('Master.Converter.ImageToZkImageConverter')" 
+               onClick="@command('goToUrl', menu =  self.tooltip) " 
+               sclass="imageDiv">
+        <attribute name="onMouseOver">
+         self.setSclass("classOnMouseOver");
+		</attribute>
+		<attribute name="onMouseOut">
+		 self.setSclass("classOnMouseOut");
+		</attribute>   
+<!-- 		<attribute name="onClick"> -->
+<!-- 		 self.setSclass("classOnClick"); -->
+<!-- 		</attribute>   -->
+     </image>
+     </hbox>
+    </div> 
+    
+    <hbox  sclass="divButton">
+    <button iconSclass="z-icon-caret-left" onClick="@command('leftButton')" sclass="w3left-button">
+     <attribute name="onClick">    
+     if(hboxGallery.getSclass().equalsIgnoreCase("classOnClickLeftButton")){
+        hboxGallery.setSclass("classOnClickLeftButtonClicked");
+     }
+     else{
+        hboxGallery.setSclass("classOnClickLeftButton");
+     }
+	 </attribute>
+    </button> 
+    <hbox sclass="hboxInt">
+    <intbox value="@bind(vm.pageNum)" onChange="@command('changePaging')" onOK="@command('changePaging')" 
+             sclass="intboxInt"/>
+    <separator width="20px"/>
+    <intbox value="@bind(vm.pageTotal)" readonly="true" sclass="intboxInt"/>
+    </hbox>
+     <button iconSclass="z-icon-caret-right" onClick="@command('rightButton')" sclass="w3right-button">
+     <attribute name="onClick">
+     if(hboxGallery.getSclass().equalsIgnoreCase("classOnClickRightButton")){
+        hboxGallery.setSclass("classOnClickRightButtonClicked");
+     }
+     else{
+        hboxGallery.setSclass("classOnClickRightButton");
+     }
+	 </attribute>
+    </button>  
+    </hbox>
+   
+    
+    </window>
+    
+    
+	</window>
+</zk>

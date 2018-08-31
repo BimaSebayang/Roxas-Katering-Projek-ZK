@@ -1,0 +1,308 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  id="lov" border="none" width="900px" height="600px" 
+    position="center,center" visible="@bind(vm.groupPageInfoForm)"  mode="highlighted" 
+    style = "background-color : transparent;" 
+    action="show: slideIn; hide: slideOut" shadow="false">
+      
+<!--    viewModel="@id('vm') @init('vmd.Transaksi.MasterConfigurasiMenuVmd')" -->
+    
+    <div style = "width:130%; height:120%; background-color : #1A1814; position :relative; top : -16px; left : -16px; ">
+    
+    <image content="@load(vm.rocketLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+		   style = "position : absolute; border-radius: 50%;
+		            top : 2px; 
+    	            left : 15px; 
+                    border-width:2px;   
+                    border-color: #0A0E0F; 
+                    border-style: solid;"/>		
+    <image content="@load(vm.sateliteLauncher) @converter('Master.Converter.ImageToZkImageConverter')"
+		   width="130px" height="130px" 
+           style = "position : absolute;  border-radius: 50%;
+           top : 2px;
+           right : 230px;
+                    border-width:2px;  
+                    border-color: #0A0E0F;
+                    border-style: solid;"/>	
+    
+    <div style="position :absolute; top : 140px; left : 0px;">
+    <vbox>
+    <button label="SAVE" onClick="@command('saveForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah or vm.saatEdit)"/>
+    <button label="BACK" onClick="@command('backForm')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("formDetailStyle");
+    </attribute>
+    </button>
+    <button label="HELP" onClick="@command('helpForm')" sclass="buttonFormInputNew" visible="@bind(vm.saatTambah or vm.saatEdit)">
+    <attribute name="onClick">
+    formDetail.setSclass("helpFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    </div>
+    
+    <div style = "position :absolute; top : 160px; right : 14px; ">
+    <vbox>
+    <button label="SHOW" onClick="@command('showProcedure')"  sclass="buttonFormInputNew"/>
+    <button label="RETURN" onClick="@command('returnProcedure')"  sclass="buttonFormInputNew">
+    <attribute name="onClick">
+    formDetail.setSclass("returnFormOnClick");
+    </attribute>
+    </button>
+    </vbox>
+    </div>
+    
+    <div style="background-color :black; width : 96.3%; height : 5px;
+    position : absolute;
+     display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-color : #0d0d12;
+    top : 280px;
+    left : 17px;"/>
+    
+   
+    <vbox id ="divForm" style="position : absolute;  top : 330px;
+    left : 18px;">
+    <button id="formulir1" onClick="@command('actionForm', valid = self.id)"
+     label="Form 1"  style = " position : relative; 
+     padding: 10px 20px; width : 160px;
+     background-color: #000000;
+	 font-size : 15px bold; height:80px;
+     padding: 10px 10px; 
+     cursor: pointer; " >
+     <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer; " ;
+        formulir1.setStyle(styleOut);
+     </attribute>
+    </button>
+    <button id="formulir2" label="Form 2" onClick="@command('actionForm', valid = self.id)"
+     style = "  color:  white ; 
+     position : relative;
+     background-color: #000000; height:80px;
+     padding: 10px 20px; width : 160px;
+	 font-size : 15px bold;
+     padding: 10px 10px; top : -5px;
+     cursor: pointer; ">
+      <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px;  top : -5px;" 
+    + " cursor: pointer; " ;
+        formulir2.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer;  top : -5px; " ;
+        formulir2.setStyle(styleOut);
+     </attribute>
+    </button>
+    <button id = "formulir3" label="Form 3" onClick="@command('actionForm', valid = self.id)"
+    style = "  color:  white ; 
+     position : relative;  width : 160px;
+     padding: 10px 20px; height:80px;
+     background-color: #000000;
+	 font-size : 15px bold; top : -10px;
+     padding: 10px 10px; 
+     cursor: pointer; ">
+      <attribute name="onMouseOver">
+        String styleOver = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: blue; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px;  top : -10px;" 
+    + " cursor: pointer; " ;
+        formulir3.setStyle(styleOver);
+     </attribute>
+     <attribute name="onMouseOut">
+      String styleOut = "position : relative; "
+    + " padding: 10px 20px; width : 160px;"
+    + " background-color: #000000; "
+    + " font-size : 15px bold; height:80px;"
+	+ " padding: 10px 10px; " 
+    + " cursor: pointer;  top : -10px; " ;
+        formulir3.setStyle(styleOut);
+     </attribute>
+     </button>
+    </vbox>
+    
+    
+    
+<!--   Start Form Detail  -->
+
+<!-- Header Start -->
+    <div id="formDetail" sclass="formDetailStyle">
+    <div style="display : inline-block; position : relative; left : 30px;" visible="@bind(vm.saatReturn)"> 
+    <div style = "position : relative; top : 0px; left : -30px ; width : 800px; height : 33px; 
+    background-color : #94C40F;">
+    <hbox>
+<!--     <button iconSclass="z-icon-file" sclass="justForIcon"/> -->
+<!--     <label value="Smart Form Ui" style = "font : 26px Comic Sans MS, cursive, sans-serif; color : white;"/> -->
+    </hbox>
+    </div>
+    <separator height="40px"/>
+<!-- Header End -->
+
+<!-- Body Start -->
+
+
+      
+<!--       form start -->
+
+      <div id = "form1" style="overflow:auto;" width="100%" height="550px" visible="@bind(vm.onForm1)" 
+      action="show: slideDown({duration: 500})">  
+      <label value="Form 1 : Informasi Umum Pelanggan"/>
+      <separator height="20px"/>
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" value="@bind(vm.tableMasterPelangganKateringDto.kodePelanggan)" 
+      width="350px" readonly="true" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)" />
+       <div sclass="panelForm"/>
+      <label value="Kode Pelanggan" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>
+      
+      <vbox>
+      <textbox constraint="@bind(vm.formConstraint.consNullValue)"  onChange="self.setValue(self.getValue().toUpperCase())"
+      value="@load(vm.tableMasterPelangganKateringDto.namaPelanggan)
+      @save(vm.tableMasterPelangganKateringDto.namaPelanggan, before={'saveForm'})"
+       id = "Nama" disabled="@bind(vm.saatLihat)"
+      placeholder="Nama Lengkap" width="350px" sclass="textboxFormInput" maxlength="50"/>
+      <div sclass="panelForm" id = "PanelNama"/>
+      <label value="Informasi Nama" sclass="labelFormInput" id = "LabelNama"/>
+      </vbox>
+      <separator height="15px"/>
+      <vbox>
+      
+      <textbox 
+      placeholder="Manual" readonly="true" width="350px" sclass="textboxFormInput" value="@bind(vm.tableMasterPelangganKateringDto.tipePelanggan)" />
+       <div sclass="panelForm"/>
+      <label value="tipe Pelanggan" sclass="labelFormInput"/>
+      </vbox>
+      
+      <separator height="15px"/>
+       
+      <vbox>
+      <textbox 
+      placeholder="Generate Otomatis" readonly="true" width="350px" sclass="textboxFormInput" value="@bind(vm.tableMasterPelangganKateringDto.kodeKupon)"  />
+       <div sclass="panelForm"/>
+      <label value="Kode Kupon" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="15px"/>
+      <vbox>
+      <textbox 
+      placeholder="Maksimal Karakter 500" maxlength="500" rows="5" width="350px" sclass="textboxFormInput" onChange="self.setValue(self.getValue().toUpperCase())"
+      value="@bind(vm.tableMasterPelangganKateringDto.keterangan)" disabled="@bind(vm.saatLihat)"/>
+       <div sclass="panelForm"/>
+      <label value="Keterangan" sclass="labelFormInput"/>
+      </vbox>
+      
+      </div>
+
+      <div id = "form2" style="overflow:auto;" width="100%" height="550px"  visible="@bind(vm.onForm2)"
+      action="show: slideDown({duration: 500})">  
+      <label value="Form 2 : Informasi Alamat Pelanggan"/>
+      <separator height="20px"/>
+      <vbox>
+      <textbox id="Alamat" value="@load(vm.tableMasterPelangganKateringDto.informasiAlamat) @save(vm.tableMasterPelangganKateringDto.informasiAlamat, before={'saveForm'})" 
+       placeholder="alamat lengkap" width="350px" rows="3" maxlength="200" sclass="textboxFormInput" onChange="self.setValue(self.getValue().toUpperCase())"
+       constraint="@bind(vm.formConstraint.consNullValue)" disabled="@bind(vm.saatLihat)"/>
+       <div sclass="panelForm" id="PanelAlamat"/>
+      <label value="Informasi Alamat" sclass="labelFormInput"  id="LabelAlamat"/>
+      </vbox>
+      <separator height="20px"/>
+      <vbox>
+       <combobox disabled="@bind(vm.saatLihat)" style="font-size : 12px;" model="@load(vm.tableMasterKotaDtos)" readonly="true" width="350px" height="35px" onClick="@command('selectBox', box = 'kota')"
+       selectedItem="@bind(vm.tableMasterKotaDto)" value="@bind(vm.tableMasterKotaDto.namaKota)" constraint="no empty,after_start : Bagian Ini Tidak Boleh Kosong">
+       <template name="model">
+       <comboitem style="font-size : 12px;" label="@load(each.namaKota)" width="350px" value="@bind(each.kodeKota)"/>
+       </template>
+       </combobox>
+       <div sclass="panelForm"/>
+      <label value="Kota" sclass="labelFormInput"/>
+      </vbox>
+      <separator width="80px"/>
+      <vbox>
+      <combobox disabled="@bind(vm.saatLihat)" style="font-size : 12px;" readonly="true" model="@load(vm.tableMasterProvinsiDtos)"  width="350px" height="35px" onClick="@command('selectBox', box = 'provinsi')"
+      selectedItem="@bind(vm.tableMasterProvinsiDto)" value="@bind(vm.tableMasterProvinsiDto.namaProvinsi)" constraint="no empty,after_start : Bagian Ini Tidak Boleh Kosong">
+      <template name="model">
+      <comboitem style="font-size : 12px;" label="@load(each.namaProvinsi)" width="350px" value="@load(each.kodeProvinsi)"/>
+      </template>
+      </combobox>
+       <div sclass="panelForm"/>
+      <label value="Provinsi" sclass="labelFormInput"/>
+      </vbox>
+      <separator height="20px"/>
+       <vbox>
+      <textbox
+       placeholder="maksimal 5 karakter" width="350px" maxlength="5" sclass="textboxFormInput" disabled="@bind(vm.saatLihat)"
+       value="@load(vm.tableMasterPelangganKateringDto.kodePosPelanggan)
+       @save(vm.tableMasterPelangganKateringDto.kodePosPelanggan,before={'saveForm'})"
+       constraint="@bind(vm.formConstraint.consNumberOnlyInTextBox)" id = "KodePos"/>
+       <div sclass="panelForm" id="PanelKodePos"/>
+      <label value="Kode Pos" sclass="labelFormInput" id = "LabelKodePos"/>
+      </vbox>
+       <separator height="20px"/>
+       <vbox>
+      <textbox
+       placeholder="format : 0xxxxxxxxxxx"  width="350px" maxlength="12" disabled="@bind(vm.saatLihat)" sclass="textboxFormInput" 
+       value="@load(vm.tableMasterPelangganKateringDto.kontakPelanggan)@save(vm.tableMasterPelangganKateringDto.kontakPelanggan,before={'saveForm'})" 
+       constraint="@bind(vm.formConstraint.consNumberOnlyInTextBox)" id = "Phone"/>
+       <div sclass="panelForm" id = "PanelPhone"/>
+      <label value="Nomor Kontak" sclass="labelFormInput" id ="LabelPhone"/>
+      </vbox>
+      </div>      
+      
+      <div id = "form3" style="overflow:auto;" width="100%" height="400px"  visible="@bind(vm.onForm3)"
+      action="show: slideDown({duration: 500}) ">  
+      <label value="Form 3 : Informasi Pembayaran"/>
+      <separator height="20px"/>
+      <vbox>
+      <decimalbox
+       placeholder="Masukkan berdasarkan uang yang diterima" width="350px" disabled="@bind(vm.saatLihat)"
+       maxlength="24" constraint="@bind(vm.formConstraint.consNullNumber)" 
+       sclass="textboxFormInput" value="@load(vm.tableMasterPelangganKateringDto.komposisiPesanan )
+       @save(vm.tableMasterPelangganKateringDto.komposisiPesanan,before={'saveForm'})" format="###,##0.00" id ="Komposisi" name="form3" />
+       <div sclass="panelForm" id = "PanelKomposisi"/>
+      <label value="Komposisi Pesanan" sclass="labelFormInput" id = "LabelKomposisi"/>
+      </vbox>
+      </div>           
+      
+<!--       form end -->
+      
+     
+<!-- Body Start -->
+
+   
+    </div>
+    </div>
+<!--   End Form Detail  -->   
+
+    </window>
+</zk>
